@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 100;
+    public int maxHealth = 5;
     private int currentHealth;
+    public bool isImmune = false;
 
     void Start()
     {
@@ -12,18 +13,13 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (isImmune) return;
+
         currentHealth -= damage;
 
         if (currentHealth <= 0)
         {
-            Die();
+            Debug.Log("Player Died");
         }
-    }
-
-    void Die()
-    {
-        Debug.Log("Player died");
-        // later: restart scene or game over
-        Destroy(gameObject);
     }
 }

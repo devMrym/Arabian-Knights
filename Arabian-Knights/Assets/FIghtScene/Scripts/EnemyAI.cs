@@ -2,53 +2,84 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public float moveSpeed = 3f;
-    public float attackRange = 1f;
-    public int attackDamage = 10;
-    public float attackCooldown = 1f;
+    public float speed = 3f;
+    public float detectionRange = 6f;
+    public float attackRange = 1.2f;
+    public float attackCooldown = 1.5f;
 
     private Transform player;
-    private EnemyVision vision;
-    private float lastAttackTime;
+    private Rigidbody2D rb;
+    private float nextAttackTime;
+
+    private Vector2 wanderDirection;
+    private float wanderTimer;
+    public float wanderChangeTime = 2f;
+
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        vision = GetComponent<EnemyVision>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
-    {
-        if (vision.canSeePlayer)
-        {
-            ChasePlayer();
-        }
-    }
-
-    void ChasePlayer()
+    void FixedUpdate()
     {
         float distance = Vector2.Distance(transform.position, player.position);
 
-        if (distance > attackRange)
+        if (distance <= detectionRange)
         {
-            transform.position = Vector2.MoveTowards(
-                transform.position,
-                player.position,
-                moveSpeed * Time.deltaTime
-            );
+            ChasePlayer(distance);
         }
         else
         {
-            AttackPlayer();
+            Wander();
         }
     }
 
-    void AttackPlayer()
+    void ChasePlayer(float distance)
     {
-        if (Time.time >= lastAttackTime + attackCooldown)
+        Vector2 dir = (player.position - transform.position).normalized;
+        rb.linearVelocity = dir * speed;
+
+        if (distance <= attackRange && Time.time >= nextAttackTime)
         {
-            player.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
-            lastAttackTime = Time.time;
+            Attack();
+            nextAttackTime = Time.time + attackCooldown;
+        }
+    }
+
+    void Wander()
+    {
+        wanderTimer -= Time.fixedDeltaTime;
+
+        if (wanderTimer <= 0)
+        {
+            PickNewDirection();
+        }
+
+        rb.linearVelocity = wanderDirection * speed * 0.6f;
+    }
+
+
+    void Attack()
+    {
+        player.GetComponent<PlayerHealth>().TakeDamage(1);
+    }
+
+    void PickNewDirection()
+    {
+        wanderTimer = wanderChangeTime;
+        wanderDirection = Random.insideUnitCircle.normalized;
+    }
+
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            PickNewDirection();
         }
     }
 }
+    
+
