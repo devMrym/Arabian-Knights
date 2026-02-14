@@ -1,30 +1,27 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoldierManager : MonoBehaviour
 {
     public static SoldierManager instance;
 
-    public List<Follow> soldiers = new List<Follow>();
-    public GameObject player;
+    public Transform player;
+    private Transform lastSoldier = null;
 
     void Awake()
     {
         instance = this;
     }
 
-    public void AddSoldier(Follow newSoldier)
+    public Transform GetFollowTarget()
     {
-        if (soldiers.Count == 0)
-        {
-            newSoldier.Target = player;
-        }
-        else
-        {
-            newSoldier.Target = soldiers[soldiers.Count - 1].gameObject;
-        }
+        if (lastSoldier == null)
+            return player;
 
-        newSoldier.isFollowing = true;
-        soldiers.Add(newSoldier);
+        return lastSoldier;
+    }
+
+    public void RegisterSoldier(Transform soldier)
+    {
+        lastSoldier = soldier;
     }
 }
