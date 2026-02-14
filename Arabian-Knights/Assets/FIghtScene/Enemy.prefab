@@ -148,9 +148,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  nextWaypointDistance: 0.3
+  detectionRadius: 10
   attackRange: 1.2
   attackDamage: 1
+  wanderRadius: 3
+  wanderCooldown: 2
+  obstacleBuffer: 0.5
 --- !u!114 &-123776003828587022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,12 +216,12 @@ MonoBehaviour:
     visualizeSensitivity: 0
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
-  rotationSpeed: 360
+  rotationSpeed: 0
   slowdownDistance: 0.6
   pickNextWaypointDist: 2
   endReachedDistance: 0.2
   alwaysDrawGizmos: 0
-  slowWhenNotFacingTarget: 1
+  slowWhenNotFacingTarget: 0
   whenCloseToDestination: 0
   constrainInsideGraph: 0
 --- !u!114 &1644442064424907695
