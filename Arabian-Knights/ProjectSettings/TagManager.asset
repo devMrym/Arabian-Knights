@@ -7,7 +7,6 @@ TagManager:
   - Obstacle
   - Enemy
   - Soldier
- 
   layers:
   - Default
   - TransparentFX
@@ -15,10 +14,10 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
-  - Enemy
-  - Hidden
   - Obstacle
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -44,9 +43,6 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: healthbar
-    uniqueID: 3049999525
     locked: 0
   m_RenderingLayers:
   - Default
