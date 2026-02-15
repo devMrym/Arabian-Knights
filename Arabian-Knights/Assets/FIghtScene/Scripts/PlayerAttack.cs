@@ -51,10 +51,13 @@ public class PlayerAttack : MonoBehaviour
 
     void UpdateAttackPointDirection()
     {
-        if (movement == null) return;
+        if (movement == null || attackPoint == null) return;
 
-        Vector2 dir = movement.facingDirection.normalized;
-        attackPoint.localPosition = dir;
+        Vector2 dir = movement.facingDirection;
+
+        float distance = 1.2f; // same as attackRange or sprite-based
+        attackPoint.localPosition = dir * distance;
     }
+
 
 }
