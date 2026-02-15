@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1644442064424907695}
   - component: {fileID: -7923528557754485637}
   - component: {fileID: 7258903654609656633}
+  - component: {fileID: -7460797265820863820}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -134,7 +135,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45f59612f5b0f04bb212c689b9e2fce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  maxHealth: 3
+  currentHealth: 0
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5034424886706093780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +159,7 @@ MonoBehaviour:
   wanderRadius: 3
   wanderCooldown: 2
   obstacleBuffer: 0.5
+  attackCooldown: 1
 --- !u!114 &-123776003828587022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,3 +295,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   separationRadius: 1.5
   separationForce: 1.5
+--- !u!114 &-7460797265820863820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851435508130894298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b85d9bb2e79cde40adc462ef3362cc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarPrefab: {fileID: -6718124771744058231, guid: 9d5f0fe0737736646b12d6c1064d7581, type: 3}

@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 8285855181943629501}
   - component: {fileID: 2359037800472758902}
   - component: {fileID: 7253978299315387762}
+  - component: {fileID: 5436709920138608268}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -313,4 +314,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
+  currentHealth: 0
   isImmune: 0
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5436709920138608268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8696702055701946062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1179cccbef3d875468ecec8125c250e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarPrefab: {fileID: -6718124771744058231, guid: 9d5f0fe0737736646b12d6c1064d7581, type: 3}

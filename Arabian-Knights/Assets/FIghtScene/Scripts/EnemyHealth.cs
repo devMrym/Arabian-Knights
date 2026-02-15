@@ -1,15 +1,32 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public int health = 3;
+    public int maxHealth = 3;
+    public int currentHealth;
+
+    public UnityEvent<int, int> onHealthChanged;
+
+    void Awake()
+    {
+        currentHealth = maxHealth;
+        onHealthChanged?.Invoke(currentHealth, maxHealth);
+    }
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        onHealthChanged?.Invoke(currentHealth, maxHealth);
+
+        if (currentHealth <= 0)
+            Die();
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }

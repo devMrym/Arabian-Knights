@@ -12,6 +12,9 @@ public class EnemyAStarAI : MonoBehaviour
     public float wanderCooldown = 2f;    // Time before picking a new wander target
     public float obstacleBuffer = 0.5f;  // Keep enemies away from obstacles
 
+    public float attackCooldown = 1f;    // Time between attacks
+    private float lastAttackTime = -Mathf.Infinity;
+
     private AIPath aiPath;
     private Seeker seeker;
 
@@ -65,10 +68,14 @@ public class EnemyAStarAI : MonoBehaviour
             aiPath.destination = wanderTarget;
         }
 
-        // Attack if close
+        // Attack if close AND cooldown passed
         if (distanceToPlayer <= attackRange)
         {
-            Attack();
+            if (Time.time - lastAttackTime >= attackCooldown)
+            {
+                Attack();
+                lastAttackTime = Time.time;
+            }
         }
     }
 
@@ -106,8 +113,12 @@ public class EnemyAStarAI : MonoBehaviour
         PlayerHealth player = target.GetComponent<PlayerHealth>();
         if (player != null)
         {
-            player.TakeDamage(attackDamage);
-            Debug.Log("Enemy attacked player!");
+            // Only attack if player is not immune
+            if (!player.isImmune)
+            {
+                player.TakeDamage(attackDamage);
+                Debug.Log("Enemy attacked player!");
+            }
         }
     }
 }
