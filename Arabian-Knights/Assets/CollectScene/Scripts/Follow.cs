@@ -2,28 +2,24 @@ using UnityEngine;
 
 public class Follow : MonoBehaviour
 {
-    public GameObject Target;
+    public Transform Target;
     public float speed = 5f;
     public bool isFollowing = false;
-    public float followDistance = 1.2f;   // spacing
+    public float followDistance = 1.2f;
 
     void Update()
     {
-        if (isFollowing && Target != null)
-        {
-            float dist = Vector2.Distance(
-                transform.position,
-                Target.transform.position
-            );
+        if (!isFollowing || Target == null) return;
 
-            if (dist > followDistance)
-            {
-                transform.position = Vector2.MoveTowards(
-                    transform.position,
-                    Target.transform.position,
-                    speed * Time.deltaTime
-                );
-            }
+        float dist = Vector2.Distance(transform.position, Target.position);
+
+        if (dist > followDistance)
+        {
+            transform.position = Vector2.MoveTowards(
+                transform.position,
+                Target.position,
+                speed * Time.deltaTime
+            );
         }
     }
 
@@ -31,8 +27,12 @@ public class Follow : MonoBehaviour
     {
         if (other.CompareTag("Player") && !isFollowing)
         {
-            SoldierManager.instance.AddSoldier(this);
+            GameManager.instance.AddSoldier();
+
+            isFollowing = true;
+
+            Target = SoldierManager.instance.GetFollowTarget();
+            SoldierManager.instance.RegisterSoldier(transform);
         }
     }
 }
-
