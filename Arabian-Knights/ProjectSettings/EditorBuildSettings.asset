@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/MainMenu/MainMenu.unity
     guid: 977b31ed7d0d9794aa4588c36a4d4ba8
   - enabled: 1
+    path: Assets/MainMenu/MainMenu.unity
+    guid: 977b31ed7d0d9794aa4588c36a4d4ba8
+  - enabled: 1
     path: Assets/CollectScene/CollectScene.unity
     guid: bc3817d81f11e814d83b45795f5b71ca
   - enabled: 1
