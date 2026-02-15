@@ -7,8 +7,11 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     path: Assets/FIghtScene/SampleScene.unity
 =======
+=======
+>>>>>>> Stashed changes
     path: Assets/MainMenu/MainMenu.unity
     guid: 977b31ed7d0d9794aa4588c36a4d4ba8
   - enabled: 1
