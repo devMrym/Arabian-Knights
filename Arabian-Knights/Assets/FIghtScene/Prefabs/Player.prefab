@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5803641212395070945}
   - component: {fileID: 5924368217998636061}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 2359037800472758902}
   - component: {fileID: 7253978299315387762}
   - component: {fileID: 5436709920138608268}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27dc97ec660f54458fcff6ab16c9308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 10
   currentHealth: 0
   isImmune: 0
   onHealthChanged:
