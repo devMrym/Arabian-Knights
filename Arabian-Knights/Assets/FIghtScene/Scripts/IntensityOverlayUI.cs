@@ -3,22 +3,35 @@ using UnityEngine.UI;
 
 public class IntensityOverlayUI : MonoBehaviour
 {
-    public Image overlayImage;              // The Image to modify
-    [Range(0f, 1f)]
-    public float pulseStrength = 0.1f;
-    [Range(0f, 5f)]
-    public float pulseSpeed = 3f;
+    public Image overlayImage;
+    public float pulseSpeed = 2f;        // Speed of opacity pulsing
+    public float pulseIntensity = 0.1f;  // How strong the pulse is
 
     private int totalEnemies = 1;
-    private int enemiesKilled = 0;
+    private int killedEnemies = 0;
     private float baseAlpha = 0f;
+
+    void Start()
+    {
+        if (overlayImage != null)
+        {
+            // Start fully transparent
+            Color c = overlayImage.color;
+            c.a = 0f;
+            overlayImage.color = c;
+        }
+    }
 
     void Update()
     {
         if (overlayImage == null) return;
 
-        // Continuous pulse
-        float pulse = Mathf.Sin(Time.time * pulseSpeed) * pulseStrength;
+        // Calculate target alpha based on kills
+        baseAlpha = (float)killedEnemies / totalEnemies;
+
+        // Apply pulsing on top
+        float pulse = Mathf.Sin(Time.time * pulseSpeed) * pulseIntensity;
+
         float finalAlpha = Mathf.Clamp01(baseAlpha + pulse);
 
         Color c = overlayImage.color;
@@ -26,22 +39,16 @@ public class IntensityOverlayUI : MonoBehaviour
         overlayImage.color = c;
     }
 
-    // Call this at the start to tell overlay how many enemies there are
-    public void SetTotalEnemies(int count)
+    // Called once from spawner to set total enemies
+    public void SetTotalEnemies(int total)
     {
-        totalEnemies = Mathf.Max(1, count);
-        UpdateBaseAlpha();
+        totalEnemies = Mathf.Max(1, total); // avoid division by zero
+        killedEnemies = 0;
     }
 
-    // Call this whenever an enemy dies
+    // Called every time an enemy dies
     public void RegisterKill()
     {
-        enemiesKilled++;
-        UpdateBaseAlpha();
-    }
-
-    private void UpdateBaseAlpha()
-    {
-        baseAlpha = Mathf.Clamp01((float)enemiesKilled / totalEnemies);
+        killedEnemies = Mathf.Clamp(killedEnemies + 1, 0, totalEnemies);
     }
 }
