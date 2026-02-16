@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: -7923528557754485637}
   - component: {fileID: 7258903654609656633}
   - component: {fileID: -7460797265820863820}
+  - component: {fileID: -5853238306979866858}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -140,6 +141,9 @@ MonoBehaviour:
   onHealthChanged:
     m_PersistentCalls:
       m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5034424886706093780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,11 +157,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  detectionRadius: 10
+  detectionRadius: 13
   attackRange: 1.2
   attackDamage: 1
-  wanderRadius: 3
-  wanderCooldown: 2
+  wanderRadius: 7
+  wanderCooldown: 4
   obstacleBuffer: 0.5
   attackCooldown: 1
 --- !u!114 &-123776003828587022
@@ -308,3 +312,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarPrefab: {fileID: -6718124771744058231, guid: 9d5f0fe0737736646b12d6c1064d7581, type: 3}
+--- !u!114 &-5853238306979866858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851435508130894298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 386920ddcecd98c409df2065c18c85a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensityUI: {fileID: 7206959686244776788, guid: 7dc337b0116597c4b9e9346b5c593c3b, type: 3}
