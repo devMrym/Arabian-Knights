@@ -301,6 +301,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shieldDuration: 5
   cooldown: 10
+  health: {fileID: 7253978299315387762}
+  shieldVisualPrefab: {fileID: 1896600348867853876, guid: 93545466468473a4a9e22df1ccddcd1a, type: 3}
 --- !u!114 &7253978299315387762
 MonoBehaviour:
   m_ObjectHideFlags: 0

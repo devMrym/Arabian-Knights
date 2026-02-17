@@ -18,6 +18,8 @@ public class EnemySpawner2D : MonoBehaviour
 
     [Header("UI Overlay")]
     public IntensityOverlayUI intensityOverlay; // drag your Image here in inspector
+    [Header("Kill Counter UI")]
+    public KillCounterUI killCounterUI;
 
     void Start()
     {
@@ -79,6 +81,12 @@ public class EnemySpawner2D : MonoBehaviour
         {
             intensityOverlay.SetTotalEnemies(enemyCount);
         }
+
+        if (killCounterUI != null)
+        {
+            killCounterUI.SetTotalEnemies(enemyCount);
+        }
+
     }
 
     void OnEnemyKilled()
@@ -86,6 +94,11 @@ public class EnemySpawner2D : MonoBehaviour
         if (intensityOverlay != null)
         {
             intensityOverlay.RegisterKill();
+        }
+
+        if (killCounterUI != null)
+        {
+            killCounterUI.RegisterKill();
         }
     }
 
