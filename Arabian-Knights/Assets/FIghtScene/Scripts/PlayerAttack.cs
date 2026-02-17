@@ -6,29 +6,44 @@ public class PlayerAttack : MonoBehaviour
     public float attackRange = 1.2f;
     public int attackDamage = 1;
     public LayerMask enemyLayer;
+
+    private PlayerHealth health;
+    private PlayerAnimation anim;
     private PlayerMovement movement;
 
-    void Start()
+    void Awake()
     {
+        health = GetComponent<PlayerHealth>();
+        anim = GetComponent<PlayerAnimation>();
         movement = GetComponent<PlayerMovement>();
     }
 
     void Update()
     {
+        if (health != null && health.isDead) return;
+
+        // Prevent spamming while attack is in progress
+        if (anim != null && anim.IsAttacking) return;
+
         UpdateAttackPointDirection();
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Attack();
+            anim.PlayAttack();
         }
     }
 
-
-    void Attack()
+    void UpdateAttackPointDirection()
     {
-        Vector2 dir = movement.facingDirection.normalized;
-        
+        if (movement == null || attackPoint == null) return;
 
+        Vector2 dir = movement.facingDirection.normalized;
+        attackPoint.localPosition = dir * attackRange;
+    }
+
+    // Called via animation event at hit frame
+    public void DealDamage()
+    {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(
             attackPoint.position,
             attackRange,
@@ -37,27 +52,7 @@ public class PlayerAttack : MonoBehaviour
 
         foreach (Collider2D enemy in enemies)
         {
-            enemy.GetComponent<EnemyHealth>().TakeDamage(attackDamage);
+            enemy.GetComponent<EnemyHealth>()?.TakeDamage(attackDamage);
         }
     }
-
-
-    void OnDrawGizmosSelected()
-    {
-        if (attackPoint == null) return;
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
-
-    void UpdateAttackPointDirection()
-    {
-        if (movement == null || attackPoint == null) return;
-
-        Vector2 dir = movement.facingDirection;
-
-        float distance = 1.2f; // same as attackRange or sprite-based
-        attackPoint.localPosition = dir * distance;
-    }
-
-
 }

@@ -57,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 40
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -124,10 +124,10 @@ TextureImporter:
         serializedVersion: 2
         x: 781
         y: 576
-        width: 222
-        height: 265
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 293
+        height: 275
+      alignment: 9
+      pivot: {x: 0.3504493, y: 0.45515424}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -140,55 +140,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Attack 3_1
-      rect:
-        serializedVersion: 2
-        x: 915
-        y: 733
-        width: 150
-        height: 130
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 89aa127ed452c9960800000000000000
-      internalID: 7609998486869748376
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack 3_2
-      rect:
-        serializedVersion: 2
-        x: 957
-        y: 730
-        width: 75
-        height: 114
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 28615c6d0b3691650800000000000000
-      internalID: 6204099572848203394
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 1906386c935751c488732f2d3968a6bf
     internalID: 0
     vertices: []
     indices: 

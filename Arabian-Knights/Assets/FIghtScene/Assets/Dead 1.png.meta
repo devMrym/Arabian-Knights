@@ -54,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 40
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -116,15 +116,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dead 1_0
+      name: enemy-dead
       rect:
         serializedVersion: 2
-        x: 302
-        y: 18
-        width: 233
-        height: 149
+        x: 219
+        y: 19
+        width: 462
+        height: 243
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -137,33 +137,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Dead 1_1
-      rect:
-        serializedVersion: 2
-        x: 519
-        y: 19
-        width: 168
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0147ed6bd3d883610800000000000000
-      internalID: 1601184963730764816
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 3981512486386624284ea4f3aaec3e76
     internalID: 0
     vertices: []
     indices: 
@@ -173,8 +151,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Dead 1_0: -5103894707215704807
       Dead 1_1: 1601184963730764816
+      enemy-dead: -5103894707215704807
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

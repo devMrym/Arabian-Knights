@@ -116,12 +116,12 @@ TextureImporter:
       name: King hurt2_0
       rect:
         serializedVersion: 2
-        x: 1033
+        x: 957
         y: 50
-        width: 395
-        height: 192
+        width: 471
+        height: 393
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 8aaa458554345e441af5fb8eb5657c0b
     internalID: 0
     vertices: []
     indices: 
