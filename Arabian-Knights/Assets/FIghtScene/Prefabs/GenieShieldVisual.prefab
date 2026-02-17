@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 295231614182845844}
   - component: {fileID: 5445436831754425194}
   - component: {fileID: -6925499416154085405}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: GenieShieldVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,9 +76,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 17998dcb033429344bdbe6e1b679a367, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.6039216}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.38039216}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

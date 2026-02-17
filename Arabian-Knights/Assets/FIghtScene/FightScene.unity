@@ -3145,9 +3145,13 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4952571968189144999, guid: 751443f0a03a93b4dac8fd4ae1c86760, type: 3}
+      propertyPath: attackRange
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7253978299315387762, guid: 751443f0a03a93b4dac8fd4ae1c86760, type: 3}
       propertyPath: maxHealth
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8696702055701946062, guid: 751443f0a03a93b4dac8fd4ae1c86760, type: 3}
       propertyPath: m_Name

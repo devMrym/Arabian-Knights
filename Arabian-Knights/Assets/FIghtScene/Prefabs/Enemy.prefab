@@ -164,7 +164,7 @@ MonoBehaviour:
   wanderRadius: 7
   wanderCooldown: 4
   obstacleBuffer: 0.5
-  attackCooldown: 1
+  attackCooldown: 2
 --- !u!114 &-123776003828587022
 MonoBehaviour:
   m_ObjectHideFlags: 0

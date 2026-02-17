@@ -9,14 +9,20 @@ public class EnemyHealth : MonoBehaviour
     public UnityEvent<int, int> onHealthChanged;
     public UnityEvent onDeath;
 
+    private EnemyAStarAI enemyAI;
+
     void Awake()
     {
         currentHealth = maxHealth;
         onHealthChanged?.Invoke(currentHealth, maxHealth);
+
+        enemyAI = GetComponent<EnemyAStarAI>();
     }
 
     public void TakeDamage(int damage)
     {
+        if (enemyAI != null && enemyAI.isDead) return;
+
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
@@ -29,6 +35,21 @@ public class EnemyHealth : MonoBehaviour
     void Die()
     {
         onDeath?.Invoke();
-        Destroy(gameObject);
+
+        if (enemyAI != null)
+            enemyAI.StopMovement();
+
+        // Play death animation from start
+        Animator animator = GetComponent<Animator>();
+        if (animator != null)
+            animator.Play("Die", 0, 0f);  // Start Die animation immediately
+
+        // Disable physics
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.bodyType = RigidbodyType2D.Static;
+        }
     }
 }
