@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
 public class EnemySpawner2D : MonoBehaviour
@@ -16,6 +16,11 @@ public class EnemySpawner2D : MonoBehaviour
     public float obstacleCheckRadius = 0.4f;
     public float positionJitter = 0.4f;
 
+    [Header("UI Overlay")]
+    public IntensityOverlayUI intensityOverlay; // drag your Image here in inspector
+    [Header("Kill Counter UI")]
+    public KillCounterUI killCounterUI;
+
     void Start()
     {
         SpawnEnemies();
@@ -23,9 +28,6 @@ public class EnemySpawner2D : MonoBehaviour
 
     void SpawnEnemies()
     {
-        if (enemyPrefab == null || enemyCount <= 0)
-            return;
-
         int columns = Mathf.CeilToInt(Mathf.Sqrt(enemyCount));
         int rows = Mathf.CeilToInt((float)enemyCount / columns);
 
@@ -58,7 +60,45 @@ public class EnemySpawner2D : MonoBehaviour
 
         foreach (Vector2 pos in spawnPoints)
         {
-            Instantiate(enemyPrefab, pos, Quaternion.identity);
+            GameObject enemy = Instantiate(enemyPrefab, pos, Quaternion.identity);
+
+            EnemyHealth health = enemy.GetComponent<EnemyHealth>();
+            if (health != null)
+            {
+                health.onDeath.AddListener(OnEnemyKilled);
+            }
+
+            // **Assign the overlay here dynamically**
+            EnemyKillBinder binder = enemy.GetComponent<EnemyKillBinder>();
+            if (binder != null && intensityOverlay != null)
+            {
+                binder.intensityOverlay = intensityOverlay;
+            }
+        }
+
+        // Tell overlay total enemies
+        if (intensityOverlay != null)
+        {
+            intensityOverlay.SetTotalEnemies(enemyCount);
+        }
+
+        if (killCounterUI != null)
+        {
+            killCounterUI.SetTotalEnemies(enemyCount);
+        }
+
+    }
+
+    void OnEnemyKilled()
+    {
+        if (intensityOverlay != null)
+        {
+            intensityOverlay.RegisterKill();
+        }
+
+        if (killCounterUI != null)
+        {
+            killCounterUI.RegisterKill();
         }
     }
 
