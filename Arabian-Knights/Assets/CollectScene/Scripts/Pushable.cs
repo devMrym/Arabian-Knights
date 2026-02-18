@@ -1,19 +1,24 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Pushable : MonoBehaviour
 {
-    public float moveDistance = 1f; // how much the barrel moves per push
-    public float moveSpeed = 5f;    // speed of the movement
+    public float moveDistance = 1f;
+    public float moveSpeed = 5f;
+    public LayerMask obstacleLayer;   // layer for walls, props, barrels, etc.
 
     private bool isMoving = false;
     private Vector3 targetPos;
 
     void Update()
     {
-        // Smoothly move the barrel if it's moving
         if (isMoving)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                targetPos,
+                moveSpeed * Time.deltaTime
+            );
+
             if (Vector3.Distance(transform.position, targetPos) < 0.01f)
             {
                 transform.position = targetPos;
@@ -26,12 +31,29 @@ public class Pushable : MonoBehaviour
     {
         if (!isMoving && collision.gameObject.CompareTag("Player"))
         {
-            Vector2 pushDir = (collision.transform.position - transform.position).normalized;
-            pushDir = -pushDir; // move away from player
+            Vector2 pushDir =
+                (transform.position - collision.transform.position).normalized;
 
-            // Calculate the next position
-            targetPos = transform.position + new Vector3(pushDir.x, pushDir.y, 0) * moveDistance;
-            isMoving = true;
+            pushDir = new Vector2(
+                Mathf.Round(pushDir.x),
+                Mathf.Round(pushDir.y)
+            );
+
+            // 🔹 Check if space is free
+            RaycastHit2D hit = Physics2D.Raycast(
+                transform.position,
+                pushDir,
+                moveDistance,
+                obstacleLayer
+            );
+
+            if (hit.collider == null)
+            {
+                targetPos = transform.position +
+                            new Vector3(pushDir.x, pushDir.y, 0) * moveDistance;
+
+                isMoving = true;
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ public class Follow : MonoBehaviour
     public Transform Target;
     public float speed = 5f;
     public bool isFollowing = false;
-    public float followDistance = 1.2f;
+    public float followDistance = 3f;
 
     void Update()
     {
