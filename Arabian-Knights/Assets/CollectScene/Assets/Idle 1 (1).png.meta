@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ed871239bd8e55145a93ad4fa9b2fb0c
+guid: 44c60694c9e5ff74481a3fcec8a6a748
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7050993540882883828
-    second: Idle 1_0
+      213: -5504153452570022580
+    second: Idle 1 (1)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,13 +46,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.1140335, y: 0.86131775}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 135, y: 937, z: 1600, w: 57}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Idle 1_0
+      name: Idle 1 (1)_0
       rect:
         serializedVersion: 2
         x: 139
@@ -121,15 +121,15 @@ TextureImporter:
         width: 185
         height: 206
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c0b1a1a7bb6d52e90800000000000000
-      internalID: -7050993540882883828
+      spriteID: c4de25ed8915d93b0800000000000000
+      internalID: -5504153452570022580
       vertices: []
       indices: 
       edges: []
@@ -138,8 +138,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Idle 1_0: -7050993540882883828
+      Idle 1 (1)_0: -5504153452570022580
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

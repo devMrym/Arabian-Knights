@@ -1,32 +1,41 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float Speed = 5f;
+    public float moveSpeed = 5f;
+
+    private Rigidbody2D rb;
+    private SpriteRenderer sprite;
     public Animator animator;
+
+    private Vector2 movement;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
+    }
 
     void Update()
     {
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
-        animator.SetFloat("speed", Mathf.Abs(x));
-        animator.SetFloat("speed2", Mathf.Abs(y));
 
+        // Store movement
+        movement = new Vector2(x, y).normalized;
 
-        // LEFT / RIGHT facing
-        if (movement.x > 0.01f)
-            facingDirection = Vector2.right;
-        else if (movement.x < -0.01f)
-            facingDirection = Vector2.left;
+        // Send speed to Animator
+        animator.SetFloat("speed", movement.magnitude);
+
+        // Flip character
+        if (x > 0.01f)
+            sprite.flipX = false; // face right
+        else if (x < -0.01f)
+            sprite.flipX = true;  // face left
     }
 
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-    }
-
-    public float GetMovementAmount()
-    {
-        return movement.magnitude;
     }
 }

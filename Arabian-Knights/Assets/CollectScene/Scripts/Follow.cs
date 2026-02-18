@@ -7,9 +7,20 @@ public class Follow : MonoBehaviour
     public bool isFollowing = false;
     public float followDistance = 3f;
 
+    private Animator anim;
+
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     void Update()
     {
-        if (!isFollowing || Target == null) return;
+        if (!isFollowing || Target == null)
+        {
+            anim.SetFloat("Speed", 0f);
+            return;
+        }
 
         float dist = Vector2.Distance(transform.position, Target.position);
 
@@ -20,6 +31,12 @@ public class Follow : MonoBehaviour
                 Target.position,
                 speed * Time.deltaTime
             );
+
+            anim.SetFloat("Speed", speed);
+        }
+        else
+        {
+            anim.SetFloat("Speed", 0f);
         }
     }
 
