@@ -13,8 +13,20 @@ public class PlayerMove : MonoBehaviour
         animator.SetFloat("speed2", Mathf.Abs(y));
 
 
-        Vector2 movement = new Vector2(x, y).normalized;
+        // LEFT / RIGHT facing
+        if (movement.x > 0.01f)
+            facingDirection = Vector2.right;
+        else if (movement.x < -0.01f)
+            facingDirection = Vector2.left;
+    }
 
-        transform.position += (Vector3)movement * Speed * Time.deltaTime;
+    void FixedUpdate()
+    {
+        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+    }
+
+    public float GetMovementAmount()
+    {
+        return movement.magnitude;
     }
 }
