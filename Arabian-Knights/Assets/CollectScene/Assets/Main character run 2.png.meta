@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c566bd71f364d4c45bf353c83f1f94f5
+guid: b017fccb7f5a67a4e83d4a9dd8ca0582
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 83538067126012518
-    second: Main character idle 1_0
+      213: 5356081034798594517
+    second: Main character run 2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,13 +46,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 9
+  spritePivot: {x: 0.4313673, y: 0.8436061}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 749, y: 876, z: 1008, w: 14}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Main character idle 1_0
+      name: Main character run 2_0
       rect:
         serializedVersion: 2
-        x: 293
-        y: 901
-        width: 242
-        height: 245
-      alignment: 9
-      pivot: {x: 0.38875297, y: 0.46529964}
-      border: {x: 0, y: 0, z: 48, w: 0}
+        x: 751
+        y: 879
+        width: 162
+        height: 308
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 66ac440fd69c82100800000000000000
-      internalID: 83538067126012518
+      spriteID: 5d9706bc25f945a40800000000000000
+      internalID: 5356081034798594517
       vertices: []
       indices: 
       edges: []
@@ -138,8 +138,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5f750661808a624468297cce9db7a4de
-    internalID: 0
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Main character idle 1_0: 83538067126012518
+      Main character run 2_0: 5356081034798594517
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

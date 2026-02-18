@@ -2,26 +2,16 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-
-    private Rigidbody2D rb;
-    private Vector2 movement;
-    private PlayerAnimation anim;
-
-    public Vector2 facingDirection = Vector2.right;
-
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
-        anim = GetComponent<PlayerAnimation>();
-    }
+    public float Speed = 5f;
+    public Animator animator;
 
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-        movement = movement.normalized;
+        float x = Input.GetAxisRaw("Horizontal");
+        float y = Input.GetAxisRaw("Vertical");
+        animator.SetFloat("speed", Mathf.Abs(x));
+        animator.SetFloat("speed2", Mathf.Abs(y));
+
 
         // LEFT / RIGHT facing
         if (movement.x > 0.01f)
