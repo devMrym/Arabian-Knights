@@ -1,14 +1,27 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraFollowFight : MonoBehaviour
 {
+    [Header("Target")]
     [SerializeField]
     private Transform target;
-    [SerializeField]
-    private BoxCollider2D cameraBounds;
 
-    private Vector3 offset = new Vector3(0f, 0f, -10f);
+    [Header("Camera Bounds")]
+    [SerializeField]
+    private BoxCollider2D boundA;
+    [SerializeField]
+    private BoxCollider2D boundB;
+
+    [Header("Smooth Settings")]
+    [SerializeField]
+    private float smoothTime = 0.25f;
+
     private Camera cam;
+    private Vector3 offset = new Vector3(0f, 0f, -10f);
+    private Vector3 velocity;
+
+    private BoxCollider2D activeBound;
+    private bool boundBLocked = false;
 
     private float minX, maxX, minY, maxY;
 
@@ -17,22 +30,51 @@ public class CameraFollowFight : MonoBehaviour
         cam = GetComponent<Camera>();
     }
 
-    void Start()
-    {
-        CalculateBounds();
-    }
-
     void LateUpdate()
     {
-        Vector3 targetPos = target.position + offset;
+        if (target == null)
+            return;
 
-        float clampedX = Mathf.Clamp(targetPos.x, minX, maxX);
-        float clampedY = Mathf.Clamp(targetPos.y, minY, maxY);
+        UpdateActiveBound();
+        if (activeBound == null)
+            return;
 
-        transform.position = new Vector3(clampedX, clampedY, offset.z);
+        CalculateBounds(activeBound);
+
+        Vector3 desiredPos = target.position + offset;
+
+        desiredPos.x = Mathf.Clamp(desiredPos.x, minX, maxX);
+        desiredPos.y = Mathf.Clamp(desiredPos.y, minY, maxY);
+
+        Vector3 smoothPos = Vector3.SmoothDamp(
+            transform.position,
+            desiredPos,
+            ref velocity,
+            smoothTime
+        );
+
+        transform.position = new Vector3(smoothPos.x, smoothPos.y, offset.z);
     }
 
-    void CalculateBounds()
+    void UpdateActiveBound()
+    {
+        if (activeBound != null)
+            return;
+
+        if (boundA != null && boundA.OverlapPoint(target.position))
+        {
+            activeBound = boundA;
+            return;
+        }
+
+        if (!boundBLocked && boundB != null && boundB.OverlapPoint(target.position))
+        {
+            activeBound = boundB;
+            boundBLocked = true; // 🔒 once entered, it becomes one-way
+        }
+    }
+
+    void CalculateBounds(BoxCollider2D cameraBounds)
     {
         Bounds bounds = cameraBounds.bounds;
 
