@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
     public bool isImmune = false;
     public bool isDead = false;
+    public ScreenFader screenFader;
 
     public UnityEvent<int, int> onHealthChanged;
 
@@ -26,21 +27,21 @@ public class PlayerHealth : MonoBehaviour
         onHealthChanged?.Invoke(currentHealth, maxHealth);
 
         if (currentHealth <= 0)
-            Die();
+            StartCoroutine(Die()); // call coroutine instead of normal method
     }
 
-    void Die()
+    private System.Collections.IEnumerator Die()
     {
-        if (isDead) return;
+        if (isDead) yield break;
 
         isDead = true;
         Debug.Log("Player Died");
 
-        // Stop all movement / physics
+        // Stop movement
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.linearVelocity = Vector2.zero;
+            rb.linearVelocity = Vector2.zero; // linearVelocity is not valid in Rigidbody2D
             rb.isKinematic = true;
         }
 
@@ -48,5 +49,12 @@ public class PlayerHealth : MonoBehaviour
         PlayerAnimation anim = GetComponent<PlayerAnimation>();
         if (anim != null)
             anim.PlayDeath();
+
+        // Wait 3 seconds before fading to black
+        yield return new WaitForSeconds(3f);
+
+        // Fade to black
+        if (screenFader != null)
+            screenFader.FadeToBlack();
     }
 }
