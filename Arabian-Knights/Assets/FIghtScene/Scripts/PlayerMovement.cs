@@ -15,12 +15,23 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        rb.freezeRotation = true;          // Prevent spinning
+        rb.gravityScale = 0f;              // Top-down game
+
         health = GetComponent<PlayerHealth>();
         anim = GetComponent<PlayerAnimation>();
     }
 
     void Update()
     {
+        // STOP EVERYTHING IF PAUSED
+        if (PauseMenu.IsPaused)
+        {
+            movement = Vector2.zero;
+            return;
+        }
+
+        // STOP IF DEAD
         if (health != null && health.isDead)
         {
             movement = Vector2.zero;
@@ -31,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         movement.y = Input.GetAxisRaw("Vertical");
         movement = movement.normalized;
 
-        // LEFT / RIGHT facing
+        // Update facing direction (Left/Right only)
         if (movement.x > 0.01f)
             facingDirection = Vector2.right;
         else if (movement.x < -0.01f)
@@ -40,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (PauseMenu.IsPaused) return;
         if (health != null && health.isDead) return;
 
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);

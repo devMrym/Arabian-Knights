@@ -12,13 +12,8 @@ public class CameraFollowFight : MonoBehaviour
     [SerializeField]
     private BoxCollider2D boundB;
 
-    [Header("Smooth Settings")]
-    [SerializeField]
-    private float smoothTime = 0.25f;
-
     private Camera cam;
     private Vector3 offset = new Vector3(0f, 0f, -10f);
-    private Vector3 velocity;
 
     private BoxCollider2D activeBound;
     private bool boundBLocked = false;
@@ -30,37 +25,35 @@ public class CameraFollowFight : MonoBehaviour
         cam = GetComponent<Camera>();
     }
 
+    void Start()
+    {
+        // Force initial bound check
+        UpdateActiveBound();
+    }
+
     void LateUpdate()
     {
         if (target == null)
             return;
 
         UpdateActiveBound();
-        if (activeBound == null)
-            return;
-
-        CalculateBounds(activeBound);
 
         Vector3 desiredPos = target.position + offset;
 
-        desiredPos.x = Mathf.Clamp(desiredPos.x, minX, maxX);
-        desiredPos.y = Mathf.Clamp(desiredPos.y, minY, maxY);
+        // If we have a bound, clamp
+        if (activeBound != null)
+        {
+            CalculateBounds(activeBound);
 
-        Vector3 smoothPos = Vector3.SmoothDamp(
-            transform.position,
-            desiredPos,
-            ref velocity,
-            smoothTime
-        );
+            desiredPos.x = Mathf.Clamp(desiredPos.x, minX, maxX);
+            desiredPos.y = Mathf.Clamp(desiredPos.y, minY, maxY);
+        }
 
-        transform.position = new Vector3(smoothPos.x, smoothPos.y, offset.z);
+        transform.position = new Vector3(desiredPos.x, desiredPos.y, offset.z);
     }
 
     void UpdateActiveBound()
     {
-        if (activeBound != null)
-            return;
-
         if (boundA != null && boundA.OverlapPoint(target.position))
         {
             activeBound = boundA;
@@ -70,7 +63,7 @@ public class CameraFollowFight : MonoBehaviour
         if (!boundBLocked && boundB != null && boundB.OverlapPoint(target.position))
         {
             activeBound = boundB;
-            boundBLocked = true; // 🔒 once entered, it becomes one-way
+            boundBLocked = true;
         }
     }
 
