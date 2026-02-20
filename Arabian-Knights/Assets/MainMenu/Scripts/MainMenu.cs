@@ -1,21 +1,55 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.Collections;
 
 public class MainMenu : MonoBehaviour
 {
-    public void PlayGame()
+    public Image fadeImage;
+    public float fadeDuration = 1f;
+
+    public void StartGame()
     {
-        SceneManager.LoadScene("CollectScene"); 
+        StartCoroutine(FadeAndLoad("first-cut-scene"));
+    }
+
+    public void OpenCredits()
+    {
+        StartCoroutine(FadeAndLoad("Credits"));
     }
 
     public void QuitGame()
     {
-        Application.Quit();
-        Debug.Log("Quit Game"); 
+        StartCoroutine(FadeAndQuit());
     }
 
-    public void Credits()
+    IEnumerator FadeAndLoad(string sceneName)
     {
-        SceneManager.LoadScene("Credits");
+        yield return StartCoroutine(FadeToBlack());
+        SceneManager.LoadScene(sceneName);
+    }
+
+    IEnumerator FadeAndQuit()
+    {
+        yield return StartCoroutine(FadeToBlack());
+        Debug.Log("Quit Game");
+        Application.Quit();
+    }
+
+    IEnumerator FadeToBlack()
+    {
+        float elapsed = 0f;
+        Color color = fadeImage.color;
+
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            color.a = Mathf.Lerp(0, 1, elapsed / fadeDuration);
+            fadeImage.color = color;
+            yield return null;
+        }
+
+        color.a = 1;
+        fadeImage.color = color;
     }
 }

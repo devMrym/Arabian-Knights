@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Video;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12,13 +13,17 @@ public class StoryScene : MonoBehaviour
     public TextMeshProUGUI storyText;
     public VideoPlayer videoPlayer;
 
+    [Header("Scene Fade")]
+    public Image sceneFadeImage;
+    public float sceneFadeDuration = 1.5f;
+    public string nextSceneName;
+
     [Header("Story Data")]
     public StoryEntry[] storyEntries;
 
     [Header("Video Control")]
     public bool enableVideoInThisScene = false;
     public List<int> videoTriggerEntries = new List<int>();
-    // Example: If you put 1 → video plays after entry index 1
 
     [Header("Timing Settings")]
     public float videoStartDelay = 0f;
@@ -51,6 +56,9 @@ public class StoryScene : MonoBehaviour
 
         if (videoPlayer != null)
             videoPlayer.loopPointReached += OnVideoFinished;
+
+        // Fade from black when scene starts
+        StartCoroutine(FadeFromBlack());
     }
 
     void Update()
@@ -73,11 +81,19 @@ public class StoryScene : MonoBehaviour
         }
         else
         {
-            // Decide whether to play video or just fade normally
-            if (enableVideoInThisScene && videoTriggerEntries.Contains(currentEntry))
-                StartCoroutine(FadeAndPlayVideo());
+            // If NOT last entry → continue normally
+            if (currentEntry < storyEntries.Length - 1)
+            {
+                if (enableVideoInThisScene && videoTriggerEntries.Contains(currentEntry))
+                    StartCoroutine(FadeAndPlayVideo());
+                else
+                    StartCoroutine(FadeWithoutVideo());
+            }
             else
-                StartCoroutine(FadeWithoutVideo());
+            {
+                // LAST entry → next Space triggers scene transition
+                StartCoroutine(FadeToNextScene());
+            }
         }
     }
 
@@ -170,6 +186,56 @@ public class StoryScene : MonoBehaviour
             if (videoPlayer != null)
                 videoPlayer.Stop();
         }
+    }
+
+    IEnumerator FadeFromBlack()
+    {
+        isLocked = true;
+
+        float timer = 0f;
+        Color color = sceneFadeImage.color;
+
+        while (timer < sceneFadeDuration)
+        {
+            timer += Time.deltaTime;
+            float t = timer / sceneFadeDuration;
+            color.a = Mathf.Lerp(1, 0, t);
+            sceneFadeImage.color = color;
+            yield return null;
+        }
+
+        color.a = 0;
+        sceneFadeImage.color = color;
+
+        isLocked = false;
+    }
+
+    IEnumerator FadeToNextScene()
+    {
+        isLocked = true;
+
+        float timer = 0f;
+        Color color = sceneFadeImage.color;
+
+        while (timer < sceneFadeDuration)
+        {
+            timer += Time.deltaTime;
+            float t = timer / sceneFadeDuration;
+            color.a = Mathf.Lerp(0, 1, t);
+            sceneFadeImage.color = color;
+            yield return null;
+        }
+
+        color.a = 1;
+        sceneFadeImage.color = color;
+
+        SceneManager.LoadScene(nextSceneName);
+    }
+
+    public void SkipScene()
+    {
+        if (!isLocked)
+            StartCoroutine(FadeToNextScene());
     }
 
     void OnVideoFinished(VideoPlayer vp)
