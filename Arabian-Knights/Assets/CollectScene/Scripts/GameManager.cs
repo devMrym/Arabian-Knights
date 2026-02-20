@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,30 +17,89 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI resultText;
     public GameObject resultPanel;
     public GameObject pausePanel;
+    public GameObject losePanel;
+
+    [Header("Tutorial")]
+    public GameObject tutorialPanel; // assign in inspector
+   // public GameObject gameplayUI;    // the UI for timer, soldier count, etc.
 
     private int soldiersCollected = 0;
     private bool isPaused = false;
+    private bool gameStarted = false; // controls when gameplay begins
 
     void Awake()
     {
+        // Singleton protection
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         instance = this;
+        //DontDestroyOnLoad(gameObject);
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ResetLevel(); // reset timer, soldiers, UI
     }
 
     void Start()
     {
+        ResetLevel();
+        ShowTutorial();
+    }
+
+    void ResetLevel()
+    {
+        // Reset timer and collected soldiers
         currentTime = gameTime;
+        soldiersCollected = 0;
+        isPaused = false;
+        gameStarted = false;
+        Time.timeScale = 0f; // pause until player starts game
 
-        resultPanel.SetActive(false);
-        pausePanel.SetActive(false);
+        // Reset UI panels
+        if (resultPanel != null) resultPanel.SetActive(false);
+        if (pausePanel != null) pausePanel.SetActive(false);
+        if (losePanel != null) losePanel.SetActive(false);
 
+        // Count soldiers in scene
         totalSoldiers = GameObject.FindGameObjectsWithTag("Soldier").Length;
 
         UpdateUI();
+        UpdateTimerUI();
+    }
+
+    void ShowTutorial()
+    {
+        if (tutorialPanel != null) tutorialPanel.SetActive(true);
+      //  if (gameplayUI != null) gameplayUI.SetActive(false);
+    }
+
+    public void StartGame()
+    {
+        gameStarted = true;
+        Time.timeScale = 1f; // resume game
+
+        if (tutorialPanel != null) tutorialPanel.SetActive(false);
+      //  if (gameplayUI != null) gameplayUI.SetActive(true);
     }
 
     void Update()
     {
-        if (!isPaused)
+        if (!isPaused && gameStarted)
         {
             currentTime -= Time.deltaTime;
 
@@ -51,7 +111,7 @@ public class GameManager : MonoBehaviour
             UpdateTimerUI();
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && gameStarted)
         {
             TogglePause();
         }
@@ -61,8 +121,6 @@ public class GameManager : MonoBehaviour
     {
         soldiersCollected++;
         UpdateUI();
-        
- 
     }
 
     void UpdateUI()
@@ -73,13 +131,33 @@ public class GameManager : MonoBehaviour
     void UpdateTimerUI()
     {
         timerText.text = "Time: " + Mathf.Ceil(currentTime);
+        if (currentTime <= 20f)
+        {
+            timerText.color = Color.red;
+        }
+        else
+        {
+            timerText.color = Color.white; // normal color
+        }
     }
 
     void EndGame()
     {
         Time.timeScale = 0f;
-        resultPanel.SetActive(true);
-        resultText.text = "You Collected: " + soldiersCollected + " Soldiers";
+
+        if (soldiersCollected <= 0)
+        {
+            if (losePanel != null)
+                losePanel.SetActive(true);
+        }
+        else
+        {
+            if (resultPanel != null)
+            {
+                resultPanel.SetActive(true);
+                resultText.text = "You Collected: " + soldiersCollected + " Soldiers";
+            }
+        }
     }
 
     public void TogglePause()
@@ -108,5 +186,21 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    // ===========================
+    // Lose Panel Buttons
+    // ===========================
+
+    public void RetryLevel()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void BackToMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
     }
 }
