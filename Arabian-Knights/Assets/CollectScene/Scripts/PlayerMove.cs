@@ -24,7 +24,6 @@ public class PlayerMove : MonoBehaviour
         // Store movement
         movement = new Vector2(x, y).normalized;
 
-<<<<<<< Updated upstream
         // Send speed to Animator
         animator.SetFloat("speed", movement.magnitude);
 
@@ -38,10 +37,5 @@ public class PlayerMove : MonoBehaviour
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-=======
-        Vector2 movement = new Vector2(x, y).normalized;
-
-        transform.position += (Vector3)movement * Speed * Time.deltaTime;
->>>>>>> Stashed changes
     }
 }
