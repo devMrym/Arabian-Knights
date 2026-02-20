@@ -153,7 +153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -9, y: -101}
+  m_AnchoredPosition: {x: -9, y: -82}
   m_SizeDelta: {x: 647, y: 63.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &40322797
@@ -364,78 +364,25 @@ MonoBehaviour:
   storyText: {fileID: 40322798}
   videoPlayer: {fileID: 665870877}
   storyEntries:
-  - image: {fileID: -3312006525132944623, guid: b0be4f613a66d684ca975e5c9e9a1939, type: 3}
+  - image: {fileID: 5574574388995198694, guid: df4ac4657f258bc44af79d3a4bf40e00, type: 3}
     texts:
-    - "One by one, the people follow. They trust the hero\u2026 and trust has a cost."
-    - 'The army surrounds the palace, ready to strike. '
+    - The kingdom suffers under the king's cruel rule. Freedoms are gone, and fear
+      clutches every street.
     textColors: []
     outlineColors: []
-  - image: {fileID: 4365899341394793666, guid: b080df5a1f698054bb68eac8c7b83d10, type: 3}
+  - image: {fileID: 2170145108321080379, guid: 22b6ff71041f8244db34a453430a6e2a, type: 3}
     texts:
-    - Only the hero may enter the throne room. The doors close behind him.
-    - "\u201CIt ends tonight. Your reign of terror is over!\u201D"
-    textColors:
-    - {r: 0.31764707, g: 0.12941177, b: 0.007843138, a: 1}
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
-    outlineColors:
-    - {r: 0.31764707, g: 0.12941177, b: 0.007843138, a: 1}
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
-  - image: {fileID: -4650431782550672262, guid: cbf0ec20d3cb49046bf1176fa1de279b, type: 3}
-    texts:
-    - "\"So\u2026 you brought them all here. Clever, but useless. You do not yet
-      know of my allies.\""
-    textColors:
-    - {r: 0.654088, g: 0, b: 0, a: 1}
-    outlineColors:
-    - {r: 0.654902, g: 0, b: 0, a: 1}
-  - image: {fileID: -6668780856226169691, guid: f94b1c6146e914846be35e051db8c0f4, type: 3}
-    texts:
-    - The king summons a genie, a creature of immense power. Light and smoke fill
-      the throne room.
-    - "\u201CBy this wish, we swap.\u201D"
-    - 'In an instant, they switch bodies. '
-    - "The hero is now trapped inside the king\u2019s body\u2026 and the king now
-      stands in the hero\u2019s body."
-    textColors:
-    - {r: 0.30980393, g: 0.13725491, b: 0.023529414, a: 1}
-    - {r: 0.654902, g: 0, b: 0, a: 1}
-    outlineColors:
-    - {r: 0.30980393, g: 0.13725491, b: 0.023529414, a: 1}
-    - {r: 0.654902, g: 0, b: 0, a: 1}
-  - image: {fileID: 7702433532029432838, guid: aa22b80f8308ae546b166f14ec69f25e, type: 3}
-    texts:
-    - "\u201CI\u2026 I\u2019m\u2026 you? How\u2026 what have you done?!\u201D"
-    - "\u201CGood luck. Outside, an army waits\u2026 eager to claim your head.\u201D"
-    textColors:
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
-    - {r: 0.654902, g: 0, b: 0, a: 1}
-    outlineColors:
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
-    - {r: 0.654902, g: 0, b: 0, a: 1}
-  - image: {fileID: -1633438344469687700, guid: b6c0790409aaa7f4e9cc55dd22d190f8, type: 3}
-    texts:
-    - "The hero is trapped. The army will see him as the king\u2026 and they will
-      fight without mercy."
-    - "The army bursts into the palace. The hero is alone. He must fight the people
-      he convinced to follow him\u2026 family, friends, neighbors."
+    - "One brave soul dares to fight\u2026 to end the suffering."
     textColors: []
     outlineColors: []
-  - image: {fileID: 8014552199118356345, guid: 37721d82ec2ce364fab2a9006caa3ec5, type: 3}
+  - image: {fileID: -4880418831224386862, guid: 671e5f0141dbe8248bfb234c9823e4ec, type: 3}
     texts:
-    - "\"I\u2026 I led them here\u2026 what have I done?\""
-    - "\"I have no choice\u2026 let them kill me and leave them to the king\u2026
-      or live and kill them to survive\u2026\" "
-    - "\"either way\u2026 I destroyed everything.\""
+    - "\"I cannot defeat him alone\u2026 I must gather the people. Only together
+      can we overthrow him.\""
     textColors:
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
+    - {r: 0.24313726, g: 0.15686275, b: 0.4392157, a: 1}
     outlineColors:
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
-  enableVideoInThisScene: 1
-  videoTriggerEntries: 02000000
+    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 0}
   videoStartDelay: 1
   fadeDelayAfterVideo: 2.3
   fadeDuration: 0.3
@@ -639,7 +586,7 @@ RectTransform:
   m_GameObject: {fileID: 713563586}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 2.9, z: 1}
+  m_LocalScale: {x: 5, y: 2.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1384856733}
