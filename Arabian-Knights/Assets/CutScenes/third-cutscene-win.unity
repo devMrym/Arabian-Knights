@@ -153,7 +153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -9, y: -82}
+  m_AnchoredPosition: {x: 0.00000095367, y: -134}
   m_SizeDelta: {x: 647, y: 63.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &40322797
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -287,14 +287,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.72955966, g: 0.72955966, b: 0.72955966, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5644889624927911716, guid: 23d1a2e9e644cc74b8c53d8313ba3498, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 43a7d98bd4222b64e933596512dc09ad, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -319,17 +319,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102447558}
-  m_LocalRotation: {x: 0, y: 0, z: 0.70090926, w: 0.71325046}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1384856733}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 89}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.11, y: -40.79}
-  m_SizeDelta: {x: 525.02, y: 802.75}
+  m_AnchoredPosition: {x: 0, y: 0.000038146973}
+  m_SizeDelta: {x: 800, y: 450.19}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &249877625
 GameObject:
@@ -364,25 +364,43 @@ MonoBehaviour:
   storyText: {fileID: 40322798}
   videoPlayer: {fileID: 665870877}
   storyEntries:
-  - image: {fileID: 5574574388995198694, guid: df4ac4657f258bc44af79d3a4bf40e00, type: 3}
+  - image: {fileID: 8014552199118356345, guid: 37721d82ec2ce364fab2a9006caa3ec5, type: 3}
     texts:
-    - The kingdom suffers under the king's cruel rule. Freedoms are gone, and fear
-      clutches every street.
-    textColors: []
-    outlineColors: []
-  - image: {fileID: 2170145108321080379, guid: 22b6ff71041f8244db34a453430a6e2a, type: 3}
-    texts:
-    - "One brave soul dares to fight\u2026 to end the suffering."
-    textColors: []
-    outlineColors: []
-  - image: {fileID: -4880418831224386862, guid: 671e5f0141dbe8248bfb234c9823e4ec, type: 3}
-    texts:
-    - "\"I cannot defeat him alone\u2026 I must gather the people. Only together
-      can we overthrow him.\""
+    - "\u201CI\u2026 I\u2019m alive\u2026 but what am I now?\u201D"
+    - "\u201CI killed them\u2026 all of them. My people\u2026 my friends\u2026 my
+      family\u2026\u201D "
+    - 'The hero sees the truth. He is the monster now. '
+    - "Every life he inspired, every trust he earned\u2026 destroyed because of his
+      plan."
+    - "\u201CWhat\u2026 what did you make me do? I led them all to their deaths!\u201D"
+    - "\"I only showed you the truth. Power always has a price.\u201D"
+    - The hero cannot bear the guilt. He is alone in a palace of corpses, surrounded
+      by the consequences of his ambition.
     textColors:
-    - {r: 0.24313726, g: 0.15686275, b: 0.4392157, a: 1}
+    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
+    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
+    - {r: 0.30980393, g: 0.13725491, b: 0.023529414, a: 1}
+    - {r: 0.30980393, g: 0.13725491, b: 0.023529414, a: 1}
+    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
+    - {r: 0.6792453, g: 0, b: 0.060216222, a: 1}
+    - {r: 0.30980393, g: 0.13725491, b: 0.023529414, a: 1}
     outlineColors:
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 0}
+    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
+    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
+    - {r: 0.30980393, g: 0.13725491, b: 0.023529414, a: 1}
+    - {r: 0.30980393, g: 0.13725491, b: 0.023529414, a: 1}
+    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
+    - {r: 0.6784314, g: 0, b: 0.058823533, a: 1}
+    - {r: 0.30980393, g: 0.13725491, b: 0.023529414, a: 1}
+  - image: {fileID: -2463469812054162113, guid: b9fd15e6451d7ef43aefc5a898ea6bd6, type: 3}
+    texts:
+    - 
+    - "The kingdom is silent. Every trust, every life, every hope\u2026 ended."
+    - "The hero\u2019s plan has left nothing but blood and shadows."
+    textColors: []
+    outlineColors: []
+  enableVideoInThisScene: 0
+  videoTriggerEntries: 
   videoStartDelay: 1
   fadeDelayAfterVideo: 2.3
   fadeDuration: 0.3
@@ -593,8 +611,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 40.665}
-  m_SizeDelta: {x: 81.33, y: 81.33}
+  m_AnchoredPosition: {x: 0, y: 44}
+  m_SizeDelta: {x: 97.5, y: 97.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &713563588
 CanvasRenderer:
@@ -692,8 +710,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5644889624927911716, guid: 23d1a2e9e644cc74b8c53d8313ba3498, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.4745098}
+  m_Sprite: {fileID: 21300000, guid: 43a7d98bd4222b64e933596512dc09ad, type: 3}
+  m_Color: {r: 0.73333335, g: 0.73333335, b: 0.73333335, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -711,13 +729,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748168854}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.70090926, w: 0.71325046}
-  m_LocalPosition: {x: -0.0784, y: -0.89, z: 0}
-  m_LocalScale: {x: 0.6940216, y: 0.9575681, z: 0.9577545}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0298, y: -0.0268, z: 0}
+  m_LocalScale: {x: 2.0685327, y: 1.7969911, z: 0.9577545}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 89}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1384856729
 GameObject:
   m_ObjectHideFlags: 0
