@@ -3,16 +3,19 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
- public void PlayGame()
+    public void PlayGame()
     {
-     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("CollectScene"); 
     }
+
     public void QuitGame()
-    {  
+    {
         Application.Quit();
+        Debug.Log("Quit Game"); 
     }
+
     public void Credits()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene("Credits");
     }
 }

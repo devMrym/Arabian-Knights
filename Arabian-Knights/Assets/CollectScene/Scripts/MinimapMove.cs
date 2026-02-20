@@ -1,18 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class MinimapMove : MonoBehaviour
 {
     public float moveSpeed = 5f;
 
-    private Rigidbody2D rb;
     private SpriteRenderer sprite;
-    public Animator animator;
 
     private Vector2 movement;
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
     }
 
@@ -24,9 +21,6 @@ public class PlayerMove : MonoBehaviour
         // Store movement
         movement = new Vector2(x, y).normalized;
 
-<<<<<<< Updated upstream
-        // Send speed to Animator
-        animator.SetFloat("speed", movement.magnitude);
 
         // Flip character
         if (x > 0.01f)
@@ -35,13 +29,5 @@ public class PlayerMove : MonoBehaviour
             sprite.flipX = true;  // face left
     }
 
-    void FixedUpdate()
-    {
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-=======
-        Vector2 movement = new Vector2(x, y).normalized;
-
-        transform.position += (Vector3)movement * Speed * Time.deltaTime;
->>>>>>> Stashed changes
-    }
+   
 }

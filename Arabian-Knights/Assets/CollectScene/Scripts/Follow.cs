@@ -9,9 +9,13 @@ public class Follow : MonoBehaviour
 
     private Animator anim;
 
+    private Vector3 lastPosition;
+    private float actualSpeed;
+
     void Start()
     {
         anim = GetComponent<Animator>();
+        lastPosition = transform.position;
     }
 
     void Update()
@@ -19,6 +23,7 @@ public class Follow : MonoBehaviour
         if (!isFollowing || Target == null)
         {
             anim.SetFloat("Speed", 0f);
+            lastPosition = transform.position;
             return;
         }
 
@@ -31,13 +36,16 @@ public class Follow : MonoBehaviour
                 Target.position,
                 speed * Time.deltaTime
             );
+        }
 
-            anim.SetFloat("Speed", speed);
-        }
-        else
-        {
-            anim.SetFloat("Speed", 0f);
-        }
+        // Calculate REAL movement speed
+        actualSpeed = (transform.position - lastPosition).magnitude / Time.deltaTime;
+
+        // Send actual speed to Animator
+        anim.SetFloat("Speed", actualSpeed);
+
+        // Save position for next frame
+        lastPosition = transform.position;
     }
 
     void OnTriggerEnter2D(Collider2D other)
