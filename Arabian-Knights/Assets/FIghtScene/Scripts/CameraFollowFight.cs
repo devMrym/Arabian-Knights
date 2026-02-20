@@ -1,14 +1,22 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraFollowFight : MonoBehaviour
 {
+    [Header("Target")]
     [SerializeField]
     private Transform target;
-    [SerializeField]
-    private BoxCollider2D cameraBounds;
 
-    private Vector3 offset = new Vector3(0f, 0f, -10f);
+    [Header("Camera Bounds")]
+    [SerializeField]
+    private BoxCollider2D boundA;
+    [SerializeField]
+    private BoxCollider2D boundB;
+
     private Camera cam;
+    private Vector3 offset = new Vector3(0f, 0f, -10f);
+
+    private BoxCollider2D activeBound;
+    private bool boundBLocked = false;
 
     private float minX, maxX, minY, maxY;
 
@@ -19,20 +27,47 @@ public class CameraFollowFight : MonoBehaviour
 
     void Start()
     {
-        CalculateBounds();
+        // Force initial bound check
+        UpdateActiveBound();
     }
 
     void LateUpdate()
     {
-        Vector3 targetPos = target.position + offset;
+        if (target == null)
+            return;
 
-        float clampedX = Mathf.Clamp(targetPos.x, minX, maxX);
-        float clampedY = Mathf.Clamp(targetPos.y, minY, maxY);
+        UpdateActiveBound();
 
-        transform.position = new Vector3(clampedX, clampedY, offset.z);
+        Vector3 desiredPos = target.position + offset;
+
+        // If we have a bound, clamp
+        if (activeBound != null)
+        {
+            CalculateBounds(activeBound);
+
+            desiredPos.x = Mathf.Clamp(desiredPos.x, minX, maxX);
+            desiredPos.y = Mathf.Clamp(desiredPos.y, minY, maxY);
+        }
+
+        transform.position = new Vector3(desiredPos.x, desiredPos.y, offset.z);
     }
 
-    void CalculateBounds()
+    void UpdateActiveBound()
+    {
+        if (boundA != null && boundA.OverlapPoint(target.position))
+        {
+            activeBound = boundA;
+            return;
+        }
+
+        if (!boundBLocked && boundB != null && boundB.OverlapPoint(target.position))
+        {
+            activeBound = boundB;
+            boundBLocked = true;
+        }
+    }
+
+    void CalculateBounds(BoxCollider2D cameraBounds)
     {
         Bounds bounds = cameraBounds.bounds;
 

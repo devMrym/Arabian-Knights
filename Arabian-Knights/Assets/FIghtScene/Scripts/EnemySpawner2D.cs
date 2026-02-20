@@ -26,68 +26,67 @@ public class EnemySpawner2D : MonoBehaviour
         SpawnEnemies();
     }
 
+
     void SpawnEnemies()
+{
+    int spawned = 0;
+    int attempts = 0;
+    int maxAttempts = enemyCount * 50; // safety cap
+
+    List<Vector2> usedPositions = new List<Vector2>();
+
+    while (spawned < enemyCount && attempts < maxAttempts)
     {
-        int columns = Mathf.CeilToInt(Mathf.Sqrt(enemyCount));
-        int rows = Mathf.CeilToInt((float)enemyCount / columns);
+        attempts++;
 
-        float cellWidth = areaSize.x / columns;
-        float cellHeight = areaSize.y / rows;
+        Vector2 randomPos = new Vector2(
+            Random.Range(areaCenter.x - areaSize.x / 2, areaCenter.x + areaSize.x / 2),
+            Random.Range(areaCenter.y - areaSize.y / 2, areaCenter.y + areaSize.y / 2)
+        );
 
-        List<Vector2> spawnPoints = new List<Vector2>();
+        // Check obstacles
+        if (Physics2D.OverlapCircle(randomPos, obstacleCheckRadius, obstacleLayer))
+            continue;
 
-        for (int y = 0; y < rows; y++)
+        // Optional: prevent enemies spawning on top of each other
+        bool tooClose = false;
+        foreach (var pos in usedPositions)
         {
-            for (int x = 0; x < columns; x++)
+            if (Vector2.Distance(pos, randomPos) < obstacleCheckRadius * 2f)
             {
-                if (spawnPoints.Count >= enemyCount)
-                    break;
-
-                Vector2 cellCenter = new Vector2(
-                    areaCenter.x - areaSize.x / 2 + cellWidth * (x + 0.5f),
-                    areaCenter.y - areaSize.y / 2 + cellHeight * (y + 0.5f)
-                );
-
-                Vector2 randomOffset = Random.insideUnitCircle * positionJitter;
-                Vector2 spawnPos = cellCenter + randomOffset;
-
-                if (!Physics2D.OverlapCircle(spawnPos, obstacleCheckRadius, obstacleLayer))
-                {
-                    spawnPoints.Add(spawnPos);
-                }
+                tooClose = true;
+                break;
             }
         }
 
-        foreach (Vector2 pos in spawnPoints)
-        {
-            GameObject enemy = Instantiate(enemyPrefab, pos, Quaternion.identity);
+        if (tooClose)
+            continue;
 
-            EnemyHealth health = enemy.GetComponent<EnemyHealth>();
-            if (health != null)
-            {
-                health.onDeath.AddListener(OnEnemyKilled);
-            }
+        GameObject enemy = Instantiate(enemyPrefab, randomPos, Quaternion.identity);
+        usedPositions.Add(randomPos);
+        spawned++;
 
-            // **Assign the overlay here dynamically**
-            EnemyKillBinder binder = enemy.GetComponent<EnemyKillBinder>();
-            if (binder != null && intensityOverlay != null)
-            {
-                binder.intensityOverlay = intensityOverlay;
-            }
-        }
+        EnemyHealth health = enemy.GetComponent<EnemyHealth>();
+        if (health != null)
+            health.onDeath.AddListener(OnEnemyKilled);
 
-        // Tell overlay total enemies
-        if (intensityOverlay != null)
-        {
-            intensityOverlay.SetTotalEnemies(enemyCount);
-        }
-
-        if (killCounterUI != null)
-        {
-            killCounterUI.SetTotalEnemies(enemyCount);
-        }
-
+        EnemyKillBinder binder = enemy.GetComponent<EnemyKillBinder>();
+        if (binder != null && intensityOverlay != null)
+            binder.intensityOverlay = intensityOverlay;
     }
+
+    if (spawned < enemyCount)
+    {
+        Debug.LogWarning($"Only spawned {spawned}/{enemyCount}. Area too crowded.");
+    }
+
+    if (intensityOverlay != null)
+        intensityOverlay.SetTotalEnemies(enemyCount);
+
+    if (killCounterUI != null)
+        killCounterUI.SetTotalEnemies(enemyCount);
+}
+
 
     void OnEnemyKilled()
     {
