@@ -9,7 +9,6 @@ public class StoryScene : MonoBehaviour
     [Header("UI References")]
     public RawImage storyImage;
     public TextMeshProUGUI storyText;
-    public Image fadeImage;
     public VideoPlayer videoPlayer;
 
     [Header("Story Data")]
@@ -22,42 +21,42 @@ public class StoryScene : MonoBehaviour
 
     private int currentEntry = 0;
     private int currentText = 0;
-    private bool isLocked = false;   // locks ALL input during transition + video
+    private bool isLocked = false;
+
+    private Color defaultTextColor;
+    private Color defaultOutlineColor;
+    private float defaultOutlineWidth;
 
     void Start()
     {
-        if (storyEntries.Length > 0)
-            ShowEntry(currentEntry);
+        // Clone the TMP material to avoid affecting the shared material
+        storyText.fontMaterial = Instantiate(storyText.fontMaterial);
 
-        if (fadeImage != null)
-            fadeImage.color = new Color(0, 0, 0, 0);
+        // Store default colors and width from material
+        defaultTextColor = storyText.color;
+        defaultOutlineColor = storyText.fontMaterial.GetColor("_OutlineColor");
+        defaultOutlineWidth = storyText.fontMaterial.GetFloat("_OutlineWidth");
+
+        if (storyEntries.Length > 0)
+        {
+            // Show first image immediately
+            storyImage.texture = storyEntries[0].image.texture;
+            storyImage.color = Color.white;
+            currentText = 0;
+            ShowLine(0, 0);
+        }
 
         if (videoPlayer != null)
-        {
             videoPlayer.loopPointReached += OnVideoFinished;
-        }
     }
 
     void Update()
     {
-        // Block ALL input if locked
         if (isLocked)
             return;
 
         if (Input.GetKeyDown(KeyCode.Space))
-        {
             NextLineOrEntry();
-        }
-    }
-
-    void ShowEntry(int index)
-    {
-        currentText = 0;
-
-        storyImage.texture = storyEntries[index].image.texture;
-        storyText.text = storyEntries[index].texts[currentText];
-
-        storyImage.color = Color.white;
     }
 
     void NextLineOrEntry()
@@ -67,7 +66,7 @@ public class StoryScene : MonoBehaviour
         if (currentText < texts.Length - 1)
         {
             currentText++;
-            storyText.text = texts[currentText];
+            ShowLine(currentEntry, currentText);
         }
         else
         {
@@ -75,38 +74,60 @@ public class StoryScene : MonoBehaviour
         }
     }
 
+    void ShowLine(int entryIndex, int textIndex)
+    {
+        StoryEntry entry = storyEntries[entryIndex];
+        storyText.text = entry.texts[textIndex];
+
+        // Set text color
+        Color textColor = (entry.textColors != null && textIndex < entry.textColors.Length)
+            ? entry.textColors[textIndex]
+            : defaultTextColor;
+        storyText.color = textColor;
+
+        // Set outline color (force alpha = 1)
+        Color outlineColor = (entry.outlineColors != null && textIndex < entry.outlineColors.Length)
+            ? entry.outlineColors[textIndex]
+            : defaultOutlineColor;
+        outlineColor.a = 1f;
+        storyText.fontMaterial.SetColor("_OutlineColor", outlineColor);
+
+        // Ensure outline width is correct
+        storyText.fontMaterial.SetFloat("_OutlineWidth", defaultOutlineWidth);
+
+        // Ensure FaceColor alpha > 0 so outline is visible
+        Color faceColor = storyText.fontMaterial.GetColor("_FaceColor");
+        if (faceColor.a == 0f)
+            faceColor.a = 1f;
+        storyText.fontMaterial.SetColor("_FaceColor", faceColor);
+
+        // Force TMP to update mesh
+        storyText.UpdateMeshPadding();
+        storyText.SetVerticesDirty();
+    }
+
     IEnumerator FadeAndPlayVideo()
     {
-        isLocked = true;   // 🔒 LOCK INPUT
+        isLocked = true;
 
-        // Optional delay before video starts
         if (videoStartDelay > 0f)
             yield return new WaitForSeconds(videoStartDelay);
 
-        // ▶ Start video FIRST
         if (videoPlayer != null)
             videoPlayer.Play();
 
-        // Wait before fade begins (video continues playing)
         yield return new WaitForSeconds(fadeDelayAfterVideo);
 
         float timer = 0f;
+        Color startColor = storyImage.color;
+        Color endColor = new Color(1, 1, 1, 0);
 
-        Color imageStart = storyImage.color;
-        Color imageEnd = new Color(1, 1, 1, 0);
-
-        Color fadeStart = fadeImage.color;
-        Color fadeEnd = new Color(0, 0, 0, 1);
-
-        // Fade OUT current image
+        // Fade out current image
         while (timer < fadeDuration)
         {
             timer += Time.deltaTime;
             float t = timer / fadeDuration;
-
-            storyImage.color = Color.Lerp(imageStart, imageEnd, t);
-            fadeImage.color = Color.Lerp(fadeStart, fadeEnd, t);
-
+            storyImage.color = Color.Lerp(startColor, endColor, t);
             yield return null;
         }
 
@@ -114,40 +135,34 @@ public class StoryScene : MonoBehaviour
 
         if (currentEntry < storyEntries.Length)
         {
-            // Setup next entry
+            // Switch to next image (start invisible)
             storyImage.texture = storyEntries[currentEntry].image.texture;
-            storyText.text = storyEntries[currentEntry].texts[0];
             currentText = 0;
+            ShowLine(currentEntry, currentText);
 
             timer = 0f;
-
             storyImage.color = new Color(1, 1, 1, 0);
-            fadeImage.color = new Color(0, 0, 0, 1);
 
-            // Fade IN next image (video still playing)
+            // Fade in next image
             while (timer < fadeDuration)
             {
                 timer += Time.deltaTime;
                 float t = timer / fadeDuration;
-
-                storyImage.color = Color.Lerp(new Color(1, 1, 1, 0), Color.white, t);
-                fadeImage.color = Color.Lerp(new Color(0, 0, 0, 1), new Color(0, 0, 0, 0), t);
-
+                storyImage.color = Color.Lerp(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), t);
                 yield return null;
             }
         }
         else
         {
-            // End of story
             if (videoPlayer != null)
                 videoPlayer.Stop();
         }
 
-        // DO NOT unlock here — wait for video to finish
+        isLocked = false;
     }
 
     void OnVideoFinished(VideoPlayer vp)
     {
-        isLocked = false;  // 🔓 UNLOCK when video completely ends
+        isLocked = false;
     }
 }

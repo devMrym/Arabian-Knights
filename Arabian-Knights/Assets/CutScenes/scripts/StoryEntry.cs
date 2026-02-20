@@ -7,4 +7,8 @@ public class StoryEntry
 
     [TextArea(2, 5)]
     public string[] texts;
+
+    // Optional colors for each line (must match texts array length)
+    public Color[] textColors;
+    public Color[] outlineColors;
 }
