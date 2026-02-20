@@ -295,16 +295,16 @@ MonoBehaviour:
     - 'The army surrounds the palace, ready to strike. '
     textColors: []
     outlineColors: []
-  - image: {fileID: 4365899341394793666, guid: b080df5a1f698054bb68eac8c7b83d10, type: 3}
+  - image: {fileID: 2170145108321080379, guid: 31245ff80558e5144b07631caebe4c11, type: 3}
     texts:
     - Only the hero may enter the throne room. The doors close behind him.
     - "\u201CIt ends tonight. Your reign of terror is over!\u201D"
     textColors:
     - {r: 0.31764707, g: 0.12941177, b: 0.007843138, a: 1}
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
+    - {r: 0.8666667, g: 0.78039217, b: 0, a: 1}
     outlineColors:
     - {r: 0.31764707, g: 0.12941177, b: 0.007843138, a: 1}
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
+    - {r: 0.86666673, g: 0.7803922, b: 0, a: 1}
   - image: {fileID: -4650431782550672262, guid: cbf0ec20d3cb49046bf1176fa1de279b, type: 3}
     texts:
     - "\"So\u2026 you brought them all here. Clever, but useless. You do not yet
@@ -327,15 +327,15 @@ MonoBehaviour:
     outlineColors:
     - {r: 0.30980393, g: 0.13725491, b: 0.023529414, a: 1}
     - {r: 0.654902, g: 0, b: 0, a: 1}
-  - image: {fileID: 7702433532029432838, guid: aa22b80f8308ae546b166f14ec69f25e, type: 3}
+  - image: {fileID: 4365899341394793666, guid: b080df5a1f698054bb68eac8c7b83d10, type: 3}
     texts:
     - "\u201CI\u2026 I\u2019m\u2026 you? How\u2026 what have you done?!\u201D"
     - "\u201CGood luck. Outside, an army waits\u2026 eager to claim your head.\u201D"
     textColors:
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
+    - {r: 0.94509804, g: 0.9254902, b: 0, a: 1}
     - {r: 0.654902, g: 0, b: 0, a: 1}
     outlineColors:
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
+    - {r: 0.9450981, g: 0.92549026, b: 0, a: 1}
     - {r: 0.654902, g: 0, b: 0, a: 1}
   - image: {fileID: -1633438344469687700, guid: b6c0790409aaa7f4e9cc55dd22d190f8, type: 3}
     texts:
@@ -343,23 +343,23 @@ MonoBehaviour:
       fight without mercy."
     - "The army bursts into the palace. The hero is alone. He must fight the people
       he convinced to follow him\u2026 family, friends, neighbors."
-    textColors: []
-    outlineColors: []
-  - image: {fileID: 8014552199118356345, guid: 37721d82ec2ce364fab2a9006caa3ec5, type: 3}
-    texts:
     - "\"I\u2026 I led them here\u2026 what have I done?\""
     - "\"I have no choice\u2026 let them kill me and leave them to the king\u2026
       or live and kill them to survive\u2026\" "
     - "\"either way\u2026 I destroyed everything.\""
     textColors:
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
+    - {r: 0.31764707, g: 0.12941177, b: 0.007843138, a: 1}
+    - {r: 0.31764707, g: 0.12941177, b: 0.007843138, a: 1}
+    - {r: 0.9450981, g: 0.92549026, b: 0, a: 1}
+    - {r: 0.9450981, g: 0.92549026, b: 0, a: 1}
+    - {r: 0.9450981, g: 0.92549026, b: 0, a: 1}
     outlineColors:
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 1}
-  enableVideoInThisScene: 1
+    - {r: 0.31764707, g: 0.12941177, b: 0.007843138, a: 1}
+    - {r: 0.31764707, g: 0.12941177, b: 0.007843138, a: 1}
+    - {r: 0.9450981, g: 0.92549026, b: 0, a: 1}
+    - {r: 0.9450981, g: 0.92549026, b: 0, a: 1}
+    - {r: 0.9450981, g: 0.92549026, b: 0, a: 1}
+  enableVideoInThisScene: 0
   videoTriggerEntries: 02000000
   videoStartDelay: 1
   fadeDelayAfterVideo: 2.3
@@ -564,7 +564,7 @@ RectTransform:
   m_GameObject: {fileID: 713563586}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 2.9, z: 1}
+  m_LocalScale: {x: 5, y: 2.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1384856733}
@@ -625,7 +625,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &769255271
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -930,7 +930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.72955966, g: 0.72955966, b: 0.72955966, a: 1}
+  m_Color: {r: 0.64779866, g: 0.64779866, b: 0.64779866, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

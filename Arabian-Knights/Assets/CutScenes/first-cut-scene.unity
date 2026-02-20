@@ -295,19 +295,17 @@ MonoBehaviour:
       clutches every street.
     textColors: []
     outlineColors: []
-  - image: {fileID: 2170145108321080379, guid: 22b6ff71041f8244db34a453430a6e2a, type: 3}
-    texts:
-    - "One brave soul dares to fight\u2026 to end the suffering."
-    textColors: []
-    outlineColors: []
   - image: {fileID: -4880418831224386862, guid: 671e5f0141dbe8248bfb234c9823e4ec, type: 3}
     texts:
+    - "One brave soul dares to fight\u2026 to end the suffering."
     - "\"I cannot defeat him alone\u2026 I must gather the people. Only together
       can we overthrow him.\""
     textColors:
-    - {r: 0.24313726, g: 0.15686275, b: 0.4392157, a: 1}
+    - {r: 0.31764707, g: 0.12941177, b: 0.015686275, a: 1}
+    - {r: 0.94509804, g: 0.9254902, b: 0, a: 1}
     outlineColors:
-    - {r: 0.24313727, g: 0.15686275, b: 0.43921572, a: 0}
+    - {r: 0.31764707, g: 0.12941177, b: 0.015686275, a: 1}
+    - {r: 0.9450981, g: 0.92549026, b: 0, a: 1}
   enableVideoInThisScene: 0
   videoTriggerEntries: 
   videoStartDelay: 1
