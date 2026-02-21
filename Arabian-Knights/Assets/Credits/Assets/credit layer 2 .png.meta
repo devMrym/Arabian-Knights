@@ -1,0 +1,494 @@
+fileFormatVersion: 2
+guid: 2ecf7b7b493bfec44898311b1948b9c3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 192141003300123740
+    second: credit layer 2 _0
+  - first:
+      213: -6799167501366409420
+    second: credit layer 2 _1
+  - first:
+      213: 8112924055605364479
+    second: credit layer 2 _2
+  - first:
+      213: 6098249419143322764
+    second: credit layer 2 _3
+  - first:
+      213: 7973984833613336631
+    second: credit layer 2 _4
+  - first:
+      213: -4068057343094528592
+    second: credit layer 2 _5
+  - first:
+      213: -2996573585194748027
+    second: credit layer 2 _6
+  - first:
+      213: -2312210271942420687
+    second: credit layer 2 _7
+  - first:
+      213: -1748775886768282057
+    second: credit layer 2 _8
+  - first:
+      213: -1010339077029299760
+    second: credit layer 2 _9
+  - first:
+      213: 6322977011665842436
+    second: credit layer 2 _10
+  - first:
+      213: 4210693224934423740
+    second: credit layer 2 _11
+  - first:
+      213: -1097019496951450401
+    second: credit layer 2 _12
+  - first:
+      213: 7887916384345550785
+    second: credit layer 2 _13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: credit layer 2 _0
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 1055
+        width: 76
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c54bd78793f9aa200800000000000000
+      internalID: 192141003300123740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: credit layer 2 _1
+      rect:
+        serializedVersion: 2
+        x: 1262
+        y: 1056
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 437cca85e2184a1a0800000000000000
+      internalID: -6799167501366409420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: credit layer 2 _2
+      rect:
+        serializedVersion: 2
+        x: 1683
+        y: 1127
+        width: 82
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff64418c175e69070800000000000000
+      internalID: 8112924055605364479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: credit layer 2 _3
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 0
+        width: 1551
+        height: 1026
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8c15cb698551a450800000000000000
+      internalID: 6098249419143322764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: credit layer 2 _4
+      rect:
+        serializedVersion: 2
+        x: 1617
+        y: 997
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73010eb45f849ae60800000000000000
+      internalID: 7973984833613336631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: credit layer 2 _5
+      rect:
+        serializedVersion: 2
+        x: 1823
+        y: 842
+        width: 48
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b56ee2666b5b87c0800000000000000
+      internalID: -4068057343094528592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: credit layer 2 _6
+      rect:
+        serializedVersion: 2
+        x: 1797
+        y: 663
+        width: 46
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 587f52763380a66d0800000000000000
+      internalID: -2996573585194748027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: credit layer 2 _7
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 459
+        width: 108
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 137dcde120169efd0800000000000000
+      internalID: -2312210271942420687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: credit layer 2 _8
+      rect:
+        serializedVersion: 2
+        x: 1736
+        y: 441
+        width: 55
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 736686da8991bb7e0800000000000000
+      internalID: -1748775886768282057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: credit layer 2 _9
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 307
+        width: 73
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d9f8f266fd8af1f0800000000000000
+      internalID: -1010339077029299760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: credit layer 2 _10
+      rect:
+        serializedVersion: 2
+        x: 1767
+        y: 318
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 401bd4f671abfb750800000000000000
+      internalID: 6322977011665842436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: credit layer 2 _11
+      rect:
+        serializedVersion: 2
+        x: 1826
+        y: 226
+        width: 52
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbc3c5acd236f6a30800000000000000
+      internalID: 4210693224934423740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: credit layer 2 _12
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 83
+        width: 105
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd4f78c649a96c0f0800000000000000
+      internalID: -1097019496951450401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: credit layer 2 _13
+      rect:
+        serializedVersion: 2
+        x: 1756
+        y: 52
+        width: 65
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cf66ead822877d60800000000000000
+      internalID: 7887916384345550785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      credit layer 2 _0: 192141003300123740
+      credit layer 2 _1: -6799167501366409420
+      credit layer 2 _10: 6322977011665842436
+      credit layer 2 _11: 4210693224934423740
+      credit layer 2 _12: -1097019496951450401
+      credit layer 2 _13: 7887916384345550785
+      credit layer 2 _2: 8112924055605364479
+      credit layer 2 _3: 6098249419143322764
+      credit layer 2 _4: 7973984833613336631
+      credit layer 2 _5: -4068057343094528592
+      credit layer 2 _6: -2996573585194748027
+      credit layer 2 _7: -2312210271942420687
+      credit layer 2 _8: -1748775886768282057
+      credit layer 2 _9: -1010339077029299760
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

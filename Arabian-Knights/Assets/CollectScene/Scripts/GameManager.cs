@@ -128,6 +128,10 @@ public class GameManager : MonoBehaviour
     {
         soldiersCollected++;
         UpdateUI();
+        if (soldiersCollected >= totalSoldiers)
+        {
+            EndGame();
+        }
     }
 
     void UpdateUI()
