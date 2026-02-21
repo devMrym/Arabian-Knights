@@ -424,6 +424,9 @@ MonoBehaviour:
   storyImage: {fileID: 713563589}
   storyText: {fileID: 40322798}
   videoPlayer: {fileID: 665870877}
+  musicSource: {fileID: 285913555}
+  sfxSource: {fileID: 1863321945}
+  backgroundMusic: {fileID: 8300000, guid: c408ff469d7491d438d69001715949b4, type: 3}
   sceneFadeImage: {fileID: 795661767}
   sceneFadeDuration: 1.5
   nextSceneName: FightScene
@@ -434,6 +437,8 @@ MonoBehaviour:
     - 'The army surrounds the palace, ready to strike. '
     textColors: []
     outlineColors: []
+    soundEffects:
+    - {fileID: 8300000, guid: cce77de3f6c8e7c49a048913817b4a16, type: 3}
   - image: {fileID: 2170145108321080379, guid: 31245ff80558e5144b07631caebe4c11, type: 3}
     texts:
     - Only the hero may enter the throne room. The doors close behind him.
@@ -444,6 +449,9 @@ MonoBehaviour:
     outlineColors:
     - {r: 0.31764707, g: 0.12941177, b: 0.007843138, a: 1}
     - {r: 0.86666673, g: 0.7803922, b: 0, a: 1}
+    soundEffects:
+    - {fileID: 0}
+    - {fileID: 8300000, guid: 957d8c733d0803f4db63c62655cd492a, type: 3}
   - image: {fileID: -4650431782550672262, guid: cbf0ec20d3cb49046bf1176fa1de279b, type: 3}
     texts:
     - "\"So\u2026 you brought them all here. Clever, but useless. You do not yet
@@ -452,6 +460,8 @@ MonoBehaviour:
     - {r: 0.654088, g: 0, b: 0, a: 1}
     outlineColors:
     - {r: 0.654902, g: 0, b: 0, a: 1}
+    soundEffects:
+    - {fileID: 8300000, guid: 70243d74069030042a37310dfbb5ec4b, type: 3}
   - image: {fileID: -6668780856226169691, guid: f94b1c6146e914846be35e051db8c0f4, type: 3}
     texts:
     - The king summons a genie, a creature of immense power. Light and smoke fill
@@ -466,6 +476,10 @@ MonoBehaviour:
     outlineColors:
     - {r: 0.30980393, g: 0.13725491, b: 0.023529414, a: 1}
     - {r: 0.654902, g: 0, b: 0, a: 1}
+    soundEffects:
+    - {fileID: 8300000, guid: 6a4e9f21dce8dd8468c5f59a4a03bc2b, type: 3}
+    - {fileID: 0}
+    - {fileID: 8300000, guid: c0cdc2c211c693542aaf883ba950d50e, type: 3}
   - image: {fileID: 4365899341394793666, guid: b080df5a1f698054bb68eac8c7b83d10, type: 3}
     texts:
     - "\u201CI\u2026 I\u2019m\u2026 you? How\u2026 what have you done?!\u201D"
@@ -476,6 +490,8 @@ MonoBehaviour:
     outlineColors:
     - {r: 0.9450981, g: 0.92549026, b: 0, a: 1}
     - {r: 0.654902, g: 0, b: 0, a: 1}
+    soundEffects:
+    - {fileID: 8300000, guid: c8b8b166d5392f3498a49f3103dd0aa9, type: 3}
   - image: {fileID: -1633438344469687700, guid: b6c0790409aaa7f4e9cc55dd22d190f8, type: 3}
     texts:
     - "The hero is trapped. The army will see him as the king\u2026 and they will
@@ -498,6 +514,7 @@ MonoBehaviour:
     - {r: 0.9450981, g: 0.92549026, b: 0, a: 1}
     - {r: 0.9450981, g: 0.92549026, b: 0, a: 1}
     - {r: 0.9450981, g: 0.92549026, b: 0, a: 1}
+    soundEffects: []
   enableVideoInThisScene: 1
   videoTriggerEntries: 02000000
   videoStartDelay: 1
@@ -513,6 +530,135 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.943992, y: -6.5985036, z: -10.070399}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &285913554
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 285913556}
+  - component: {fileID: 285913555}
+  m_Layer: 0
+  m_Name: MusicSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &285913555
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285913554}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.3
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &285913556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285913554}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.3905325, y: -4.865536, z: -0.20570488}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1441,6 +1587,135 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1842961394}
   m_CullTransparentMesh: 1
+--- !u!1 &1863321944
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1863321946}
+  - component: {fileID: 1863321945}
+  m_Layer: 0
+  m_Name: SFXSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1863321945
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863321944}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.4
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1863321946
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863321944}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.3905325, y: -4.865536, z: -0.20570488}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1963119708
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,3 +1886,5 @@ SceneRoots:
   - {fileID: 1963119710}
   - {fileID: 249877627}
   - {fileID: 769255272}
+  - {fileID: 1863321946}
+  - {fileID: 285913556}

@@ -13,6 +13,11 @@ public class StoryScene : MonoBehaviour
     public TextMeshProUGUI storyText;
     public VideoPlayer videoPlayer;
 
+    [Header("Audio")]
+    public AudioSource musicSource;
+    public AudioSource sfxSource;
+    public AudioClip backgroundMusic;
+
     [Header("Scene Fade")]
     public Image sceneFadeImage;
     public float sceneFadeDuration = 1.5f;
@@ -46,6 +51,14 @@ public class StoryScene : MonoBehaviour
         defaultOutlineColor = storyText.fontMaterial.GetColor("_OutlineColor");
         defaultOutlineWidth = storyText.fontMaterial.GetFloat("_OutlineWidth");
 
+        // 🎵 Start music
+        if (musicSource != null && backgroundMusic != null)
+        {
+            musicSource.clip = backgroundMusic;
+            musicSource.loop = true;
+            musicSource.Play();
+        }
+
         if (storyEntries.Length > 0)
         {
             storyImage.texture = storyEntries[0].image.texture;
@@ -57,7 +70,6 @@ public class StoryScene : MonoBehaviour
         if (videoPlayer != null)
             videoPlayer.loopPointReached += OnVideoFinished;
 
-        // Fade from black when scene starts
         StartCoroutine(FadeFromBlack());
     }
 
@@ -81,7 +93,6 @@ public class StoryScene : MonoBehaviour
         }
         else
         {
-            // If NOT last entry → continue normally
             if (currentEntry < storyEntries.Length - 1)
             {
                 if (enableVideoInThisScene && videoTriggerEntries.Contains(currentEntry))
@@ -91,7 +102,6 @@ public class StoryScene : MonoBehaviour
             }
             else
             {
-                // LAST entry → next Space triggers scene transition
                 StartCoroutine(FadeToNextScene());
             }
         }
@@ -117,6 +127,15 @@ public class StoryScene : MonoBehaviour
 
         storyText.UpdateMeshPadding();
         storyText.SetVerticesDirty();
+
+        // 🔊 Play SFX
+        if (sfxSource != null &&
+            entry.soundEffects != null &&
+            textIndex < entry.soundEffects.Length &&
+            entry.soundEffects[textIndex] != null)
+        {
+            sfxSource.PlayOneShot(entry.soundEffects[textIndex]);
+        }
     }
 
     IEnumerator FadeAndPlayVideo()
@@ -139,9 +158,7 @@ public class StoryScene : MonoBehaviour
     IEnumerator FadeWithoutVideo()
     {
         isLocked = true;
-
         yield return StartCoroutine(FadeImageAndAdvance());
-
         isLocked = false;
     }
 

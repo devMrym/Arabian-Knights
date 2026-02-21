@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class StoryEntry
@@ -11,4 +11,7 @@ public class StoryEntry
     // Optional colors for each line (must match texts array length)
     public Color[] textColors;
     public Color[] outlineColors;
+
+    // 🔊 NEW: Optional sound per line (same size as texts)
+    public AudioClip[] soundEffects;
 }
