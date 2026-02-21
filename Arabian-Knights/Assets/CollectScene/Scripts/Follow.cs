@@ -10,12 +10,15 @@ public class Follow : MonoBehaviour
     private Animator anim;
 
     private Vector3 lastPosition;
+    private Vector3 originalScale;
+
     private float actualSpeed;
 
     void Start()
     {
         anim = GetComponent<Animator>();
         lastPosition = transform.position;
+        originalScale = transform.localScale;
     }
 
     void Update()
@@ -46,6 +49,20 @@ public class Follow : MonoBehaviour
 
         // Save position for next frame
         lastPosition = transform.position;
+
+        if (dist > followDistance)
+        {
+            transform.position = Vector2.MoveTowards(
+                transform.position,
+                Target.position,
+                speed * Time.deltaTime
+            );
+
+            if (Target.position.x > transform.position.x)
+                transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
+            else if (Target.position.x < transform.position.x)
+                transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
