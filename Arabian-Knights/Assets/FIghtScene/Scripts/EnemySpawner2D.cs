@@ -19,6 +19,9 @@ public class EnemySpawner2D : MonoBehaviour
     [Header("Kill Counter UI")]
     public KillCounterUI killCounterUI;
 
+    [Header("Intensity Overlay UI")]
+    public IntensityOverlayUI intensityOverlay;
+
     void Start()
     {
         // Override enemyCount with collected soldiers if available
@@ -65,10 +68,18 @@ public class EnemySpawner2D : MonoBehaviour
             EnemyHealth health = enemy.GetComponent<EnemyHealth>();
             if (health != null)
                 health.onDeath.AddListener(OnEnemyKilled);
+
+            // Assign intensityOverlay to the binder so it gets notified on death
+            EnemyKillBinder binder = enemy.GetComponent<EnemyKillBinder>();
+            if (binder != null)
+                binder.intensityOverlay = intensityOverlay;
         }
 
         if (killCounterUI != null)
             killCounterUI.SetTotalEnemies(enemyCount);
+
+        if (intensityOverlay != null)
+            intensityOverlay.SetTotalEnemies(enemyCount);
     }
 
     void OnEnemyKilled()

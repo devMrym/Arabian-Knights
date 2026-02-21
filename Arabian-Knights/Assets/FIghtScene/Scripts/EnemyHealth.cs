@@ -10,12 +10,15 @@ public class EnemyHealth : MonoBehaviour
     public UnityEvent onDeath;
 
     private EnemyAStarAI enemyAI;
+    private CapsuleCollider2D capsuleCollider;
 
     void Awake()
     {
         currentHealth = maxHealth;
         onHealthChanged?.Invoke(currentHealth, maxHealth);
+
         enemyAI = GetComponent<EnemyAStarAI>();
+        capsuleCollider = GetComponent<CapsuleCollider2D>(); // Get the collider
     }
 
     public void TakeDamage(int damage)
@@ -48,5 +51,9 @@ public class EnemyHealth : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             rb.bodyType = RigidbodyType2D.Static;
         }
+
+        // Disable Capsule Collider
+        if (capsuleCollider != null)
+            capsuleCollider.enabled = false;
     }
 }
