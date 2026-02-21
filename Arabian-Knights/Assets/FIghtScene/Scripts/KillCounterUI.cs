@@ -4,8 +4,8 @@ using System.Collections;
 
 public class KillCounterUI : MonoBehaviour
 {
-    public TextMeshProUGUI killText;
-    public ScreenFader screenFader; // reference to your screen fader
+    public TextMeshProUGUI killText;  // Must be assigned in inspector
+    public ScreenFader screenFader;
 
     private int totalEnemies;
     private int killedEnemies;
@@ -24,22 +24,21 @@ public class KillCounterUI : MonoBehaviour
 
         if (killedEnemies >= totalEnemies)
         {
-            // All enemies killed → start fade
             if (screenFader != null)
-                StartCoroutine(FadeAfterDelay(3f)); // optional delay before fading
+                StartCoroutine(FadeAfterDelay(1f)); // optional short delay
         }
     }
 
-    void UpdateText()
+    private void UpdateText()
     {
-        killText.text = $"Killed {killedEnemies} / {totalEnemies}";
+        if (killText != null)
+            killText.text = $"Kills: {killedEnemies} / {totalEnemies}";
     }
 
     private IEnumerator FadeAfterDelay(float delay)
     {
-        // Optional: wait before fading, e.g., let player see the final kill
-        yield return new WaitForSeconds(delay);
-
-        screenFader.FadeToBlack();
+        yield return new WaitForSecondsRealtime(delay); // works even if game is paused
+        if (screenFader != null)
+            yield return StartCoroutine(screenFader.FadeToBlackRoutine());
     }
 }

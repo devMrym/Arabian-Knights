@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -27,34 +28,31 @@ public class PlayerHealth : MonoBehaviour
         onHealthChanged?.Invoke(currentHealth, maxHealth);
 
         if (currentHealth <= 0)
-            StartCoroutine(Die()); // call coroutine instead of normal method
+            StartCoroutine(Die());
     }
 
-    private System.Collections.IEnumerator Die()
+    private IEnumerator Die()
     {
         if (isDead) yield break;
 
         isDead = true;
-        Debug.Log("Player Died");
 
-        // Stop movement
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.linearVelocity = Vector2.zero; // linearVelocity is not valid in Rigidbody2D
+            rb.linearVelocity = Vector2.zero;
             rb.isKinematic = true;
         }
 
-        // Play death animation
         PlayerAnimation anim = GetComponent<PlayerAnimation>();
         if (anim != null)
             anim.PlayDeath();
 
-        // Wait 3 seconds before fading to black
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSecondsRealtime(3f);
 
-        // Fade to black
         if (screenFader != null)
-            screenFader.FadeToBlack();
+            yield return StartCoroutine(screenFader.FadeToBlackRoutine());
+
+        GameManagerFight.Instance.PlayerDied();
     }
 }

@@ -15,7 +15,6 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         onHealthChanged?.Invoke(currentHealth, maxHealth);
-
         enemyAI = GetComponent<EnemyAStarAI>();
     }
 
@@ -39,12 +38,10 @@ public class EnemyHealth : MonoBehaviour
         if (enemyAI != null)
             enemyAI.StopMovement();
 
-        // Play death animation from start
         Animator animator = GetComponent<Animator>();
         if (animator != null)
-            animator.Play("Die", 0, 0f);  // Start Die animation immediately
+            animator.Play("Die", 0, 0f);
 
-        // Disable physics
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
         {

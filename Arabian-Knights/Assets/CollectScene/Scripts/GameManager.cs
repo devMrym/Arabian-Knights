@@ -26,7 +26,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Scene Fade")]
     public Image sceneFadeImage;
-    public float sceneFadeDuration = 2f;
+    public float fadeInDuration = 2f;
+    public float fadeOutDuration = 2f;
     public float resultDisplayTime = 5f;
     public float delayBeforeFade = 3f;
     public string nextSceneName;
@@ -44,6 +45,15 @@ public class GameManager : MonoBehaviour
             return;
         }
         instance = this;
+
+        // Ensure fade image starts fully black
+        if (sceneFadeImage != null)
+        {
+            Color c = sceneFadeImage.color;
+            c.a = 1f;
+            sceneFadeImage.color = c;
+            sceneFadeImage.raycastTarget = false; // allow clicks through
+        }
     }
 
     void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
@@ -55,7 +65,15 @@ public class GameManager : MonoBehaviour
     {
         ResetLevel();
         ShowTutorial();
-        StartCoroutine(FadeFromBlack());
+        // Wait one frame before starting fade so image is drawn
+        StartCoroutine(StartFadeInNextFrame());
+    }
+
+    IEnumerator StartFadeInNextFrame()
+    {
+        yield return null; // wait one frame
+        if (sceneFadeImage != null)
+            StartCoroutine(FadeFromBlack());
     }
 
     void ResetLevel()
@@ -148,52 +166,64 @@ public class GameManager : MonoBehaviour
     }
 
     // =====================
-    // Smooth Fade In / Out
+    // Fade In / Fade Out
     // =====================
 
-    IEnumerator FadeFromBlack()
+IEnumerator FadeFromBlack()
+{
+    isTransitioning = true;
+
+    // Force black panel fully visible before anything renders
+    sceneFadeImage.color = Color.black;
+    sceneFadeImage.raycastTarget = true; // block clicks
+    Canvas.ForceUpdateCanvases();
+
+    // Wait one frame so black is fully drawn
+    yield return null;
+
+    float timer = 0f;
+    while (timer < fadeInDuration)
     {
-        isTransitioning = true;
-        float timer = 0f;
-        Color color = sceneFadeImage.color;
-        color.a = 1f;
-        sceneFadeImage.color = color;
+        timer += Time.unscaledDeltaTime;
+        float t = Mathf.Clamp01(timer / fadeInDuration);
 
-        while (timer < sceneFadeDuration)
-        {
-            timer += Time.unscaledDeltaTime;
-            float t = Mathf.Clamp01(timer / sceneFadeDuration);
-            color.a = Mathf.Lerp(1f, 0f, Mathf.SmoothStep(0f, 1f, t));
-            sceneFadeImage.color = color;
-            yield return null;
-        }
+        // Linear fade from black to transparent
+        Color c = sceneFadeImage.color;
+        c.a = 1f - t;
+        sceneFadeImage.color = c;
 
-        color.a = 0f;
-        sceneFadeImage.color = color;
-        isTransitioning = false;
+        yield return null;
     }
+
+    // Done fading
+    Color final = sceneFadeImage.color;
+    final.a = 0f;
+    sceneFadeImage.color = final;
+    sceneFadeImage.raycastTarget = false; // allow clicks
+    isTransitioning = false;
+}
 
     IEnumerator FadeToBlackAndLoad(string sceneName)
     {
         if (isTransitioning) yield break;
         isTransitioning = true;
 
-        float timer = 0f;
-        Color color = sceneFadeImage.color;
-        color.a = 0f;
-        sceneFadeImage.color = color;
+        Color c = sceneFadeImage.color;
+        c.a = 0f;
+        sceneFadeImage.color = c;
 
-        while (timer < sceneFadeDuration)
+        float timer = 0f;
+        while (timer < fadeOutDuration)
         {
             timer += Time.unscaledDeltaTime;
-            float t = Mathf.Clamp01(timer / sceneFadeDuration);
-            color.a = Mathf.Lerp(0f, 1f, Mathf.SmoothStep(0f, 1f, t));
-            sceneFadeImage.color = color;
+            float t = Mathf.Clamp01(timer / fadeOutDuration);
+            c.a = t; // linear fade
+            sceneFadeImage.color = c;
             yield return null;
         }
 
-        color.a = 1f;
-        sceneFadeImage.color = color;
+        c.a = 1f;
+        sceneFadeImage.color = c;
 
         Time.timeScale = 1f;
         SceneManager.LoadScene(sceneName);

@@ -3,16 +3,16 @@ using Pathfinding;
 
 public class EnemyAStarAI : MonoBehaviour
 {
-    public Transform target;               // Player target
-    public float detectionRadius = 5f;     // Distance to start chasing
-    public float attackRange = 1f;         // Distance to attack
+    public Transform target;
+    public float detectionRadius = 5f;
+    public float attackRange = 1f;
     public int attackDamage = 1;
 
-    public float wanderRadius = 5f;        // Max distance from current position for wandering
-    public float wanderCooldown = 2f;      // Time before picking a new wander target
-    public float obstacleBuffer = 0.5f;    // Keep enemies away from obstacles
+    public float wanderRadius = 5f;
+    public float wanderCooldown = 2f;
+    public float obstacleBuffer = 0.5f;
 
-    public float attackCooldown = 1f;      // Time between attacks
+    public float attackCooldown = 1f;
     private float lastAttackTime = -Mathf.Infinity;
 
     [HideInInspector]
@@ -32,13 +32,6 @@ public class EnemyAStarAI : MonoBehaviour
         seeker = GetComponent<Seeker>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        aiPath.maxSpeed = 3f;
-        aiPath.rotationSpeed = 0f;
-        aiPath.canMove = true;
-        aiPath.canSearch = true;
-        aiPath.endReachedDistance = 0.1f;
-        aiPath.slowWhenNotFacingTarget = false;
     }
 
     void Start()
@@ -51,11 +44,10 @@ public class EnemyAStarAI : MonoBehaviour
 
     void Update()
     {
-        if (target == null || isDead) return; // Stop everything if dead
+        if (!GameManagerFight.Instance.gameStarted || isDead) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, target.position);
 
-        // Chasing or wandering
         if (distanceToPlayer <= detectionRadius)
             aiPath.destination = target.position;
         else
@@ -67,18 +59,15 @@ public class EnemyAStarAI : MonoBehaviour
             aiPath.destination = wanderTarget;
         }
 
-        // Flip sprite depending on movement direction
         if (aiPath.velocity.x != 0)
             spriteRenderer.flipX = aiPath.velocity.x < 0;
 
-        // Attack if in range
         if (distanceToPlayer <= attackRange && Time.time - lastAttackTime >= attackCooldown)
         {
             Attack();
             lastAttackTime = Time.time;
         }
 
-        // Run animation only if moving, alive, and not attacking
         bool isMoving = aiPath.velocity.magnitude > 0.1f;
         bool isAttackingNow = animator.GetCurrentAnimatorStateInfo(0).IsName("Attack");
         animator.SetBool("isRunning", !isDead && isMoving && !isAttackingNow);
@@ -114,10 +103,8 @@ public class EnemyAStarAI : MonoBehaviour
     {
         if (isDead) return;
 
-        // Trigger attack animation
         animator.SetTrigger("isAttacking");
 
-        // Deal damage
         PlayerHealth player = target.GetComponent<PlayerHealth>();
         if (player != null && !player.isImmune)
             player.TakeDamage(attackDamage);
@@ -126,8 +113,7 @@ public class EnemyAStarAI : MonoBehaviour
     public void StopMovement()
     {
         isDead = true;
-        enabled = false;               // stop Update
-        if (aiPath != null)
-            aiPath.canMove = false;
+        enabled = false;
+        if (aiPath != null) aiPath.canMove = false;
     }
 }
