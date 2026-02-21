@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
             Color c = sceneFadeImage.color;
             c.a = 1f;
             sceneFadeImage.color = c;
-            sceneFadeImage.raycastTarget = false; // allow clicks through
+            sceneFadeImage.raycastTarget = false;
         }
     }
 
@@ -65,13 +65,12 @@ public class GameManager : MonoBehaviour
     {
         ResetLevel();
         ShowTutorial();
-        // Wait one frame before starting fade so image is drawn
         StartCoroutine(StartFadeInNextFrame());
     }
 
     IEnumerator StartFadeInNextFrame()
     {
-        yield return null; // wait one frame
+        yield return null;
         if (sceneFadeImage != null)
             StartCoroutine(FadeFromBlack());
     }
@@ -83,6 +82,10 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         gameStarted = false;
         isTransitioning = false;
+
+        // Reset SessionData too so retry starts fresh
+        if (SessionData.instance != null)
+            SessionData.instance.soldiersCollected = 0;
 
         Time.timeScale = 0f;
 
@@ -153,6 +156,11 @@ public class GameManager : MonoBehaviour
             {
                 resultPanel.SetActive(true);
                 resultText.text = "You Collected: " + soldiersCollected + " Soldiers";
+
+                // Save to SessionData before transitioning
+                if (SessionData.instance != null)
+                    SessionData.instance.soldiersCollected = soldiersCollected;
+
                 StartCoroutine(ResultFadeSequence());
             }
         }
@@ -165,43 +173,35 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(FadeToBlackAndLoad(nextSceneName));
     }
 
-    // =====================
-    // Fade In / Fade Out
-    // =====================
-
-IEnumerator FadeFromBlack()
-{
-    isTransitioning = true;
-
-    // Force black panel fully visible before anything renders
-    sceneFadeImage.color = Color.black;
-    sceneFadeImage.raycastTarget = true; // block clicks
-    Canvas.ForceUpdateCanvases();
-
-    // Wait one frame so black is fully drawn
-    yield return null;
-
-    float timer = 0f;
-    while (timer < fadeInDuration)
+    IEnumerator FadeFromBlack()
     {
-        timer += Time.unscaledDeltaTime;
-        float t = Mathf.Clamp01(timer / fadeInDuration);
+        isTransitioning = true;
 
-        // Linear fade from black to transparent
-        Color c = sceneFadeImage.color;
-        c.a = 1f - t;
-        sceneFadeImage.color = c;
+        sceneFadeImage.color = Color.black;
+        sceneFadeImage.raycastTarget = true;
+        Canvas.ForceUpdateCanvases();
 
         yield return null;
-    }
 
-    // Done fading
-    Color final = sceneFadeImage.color;
-    final.a = 0f;
-    sceneFadeImage.color = final;
-    sceneFadeImage.raycastTarget = false; // allow clicks
-    isTransitioning = false;
-}
+        float timer = 0f;
+        while (timer < fadeInDuration)
+        {
+            timer += Time.unscaledDeltaTime;
+            float t = Mathf.Clamp01(timer / fadeInDuration);
+
+            Color c = sceneFadeImage.color;
+            c.a = 1f - t;
+            sceneFadeImage.color = c;
+
+            yield return null;
+        }
+
+        Color final = sceneFadeImage.color;
+        final.a = 0f;
+        sceneFadeImage.color = final;
+        sceneFadeImage.raycastTarget = false;
+        isTransitioning = false;
+    }
 
     IEnumerator FadeToBlackAndLoad(string sceneName)
     {
@@ -217,7 +217,7 @@ IEnumerator FadeFromBlack()
         {
             timer += Time.unscaledDeltaTime;
             float t = Mathf.Clamp01(timer / fadeOutDuration);
-            c.a = t; // linear fade
+            c.a = t;
             sceneFadeImage.color = c;
             yield return null;
         }
@@ -228,10 +228,6 @@ IEnumerator FadeFromBlack()
         Time.timeScale = 1f;
         SceneManager.LoadScene(sceneName);
     }
-
-    // =====================
-    // Pause / Resume
-    // =====================
 
     public void TogglePause()
     {
@@ -249,9 +245,6 @@ IEnumerator FadeFromBlack()
 
     public void QuitGame() => Application.Quit();
 
-    // =====================
-    // Lose Panel Buttons with Fade
-    // =====================
     public void RetryLevel()
     {
         StartCoroutine(FadeToBlackAndLoad(SceneManager.GetActiveScene().name));

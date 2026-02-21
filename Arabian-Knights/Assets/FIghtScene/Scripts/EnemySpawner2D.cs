@@ -21,6 +21,10 @@ public class EnemySpawner2D : MonoBehaviour
 
     void Start()
     {
+        // Override enemyCount with collected soldiers if available
+        if (SessionData.instance != null && SessionData.instance.soldiersCollected > 0)
+            enemyCount = SessionData.instance.soldiersCollected;
+
         SpawnEnemies();
     }
 
@@ -29,13 +33,11 @@ public class EnemySpawner2D : MonoBehaviour
         int spawned = 0;
         int attempts = 0;
         int maxAttempts = enemyCount * 50;
-
         List<Vector2> usedPositions = new List<Vector2>();
 
         while (spawned < enemyCount && attempts < maxAttempts)
         {
             attempts++;
-
             Vector2 randomPos = new Vector2(
                 Random.Range(areaCenter.x - areaSize.x / 2, areaCenter.x + areaSize.x / 2),
                 Random.Range(areaCenter.y - areaSize.y / 2, areaCenter.y + areaSize.y / 2)
@@ -58,7 +60,6 @@ public class EnemySpawner2D : MonoBehaviour
             GameObject enemy = Instantiate(enemyPrefab, randomPos, Quaternion.identity);
             usedPositions.Add(randomPos);
             spawned++;
-
             GameManagerFight.Instance.RegisterEnemy();
 
             EnemyHealth health = enemy.GetComponent<EnemyHealth>();
