@@ -35,6 +35,9 @@ public class StoryScene : MonoBehaviour
     public float fadeDelayAfterVideo = 1.5f;
     public float fadeDuration = 1.5f;
 
+    [Header("Typing Effect")]
+    public float typingSpeed = 0.04f;
+
     private int currentEntry = 0;
     private int currentText = 0;
     private bool isLocked = false;
@@ -42,6 +45,10 @@ public class StoryScene : MonoBehaviour
     private Color defaultTextColor;
     private Color defaultOutlineColor;
     private float defaultOutlineWidth;
+
+    private Coroutine typingCoroutine;
+    private bool isTyping = false;
+    private string fullLine;
 
     void Start()
     {
@@ -51,7 +58,7 @@ public class StoryScene : MonoBehaviour
         defaultOutlineColor = storyText.fontMaterial.GetColor("_OutlineColor");
         defaultOutlineWidth = storyText.fontMaterial.GetFloat("_OutlineWidth");
 
-        // 🎵 Start music
+        // 🎵 Start background music
         if (musicSource != null && backgroundMusic != null)
         {
             musicSource.clip = backgroundMusic;
@@ -79,7 +86,19 @@ public class StoryScene : MonoBehaviour
             return;
 
         if (Input.GetKeyDown(KeyCode.Space))
-            NextLineOrEntry();
+        {
+            if (isTyping)
+            {
+                // Finish typing instantly
+                StopCoroutine(typingCoroutine);
+                storyText.text = fullLine;
+                isTyping = false;
+            }
+            else
+            {
+                NextLineOrEntry();
+            }
+        }
     }
 
     void NextLineOrEntry()
@@ -110,7 +129,13 @@ public class StoryScene : MonoBehaviour
     void ShowLine(int entryIndex, int textIndex)
     {
         StoryEntry entry = storyEntries[entryIndex];
-        storyText.text = entry.texts[textIndex];
+
+        fullLine = entry.texts[textIndex];
+
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        typingCoroutine = StartCoroutine(TypeText(fullLine));
 
         Color textColor = (entry.textColors != null && textIndex < entry.textColors.Length)
             ? entry.textColors[textIndex]
@@ -136,6 +161,20 @@ public class StoryScene : MonoBehaviour
         {
             sfxSource.PlayOneShot(entry.soundEffects[textIndex]);
         }
+    }
+
+    IEnumerator TypeText(string line)
+    {
+        isTyping = true;
+        storyText.text = "";
+
+        foreach (char letter in line)
+        {
+            storyText.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+
+        isTyping = false;
     }
 
     IEnumerator FadeAndPlayVideo()
