@@ -1387,7 +1387,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 160030883}
         m_TargetAssemblyTypeName: CreditsManager, Assembly-CSharp
         m_MethodName: BackButton
         m_Mode: 1
