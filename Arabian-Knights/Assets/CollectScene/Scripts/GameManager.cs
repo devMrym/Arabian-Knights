@@ -203,13 +203,14 @@ public class GameManager : MonoBehaviour
 
         while (countdown > 0)
         {
-            countdownText.text = "Leaving in: " + Mathf.Ceil(countdown);
+            countdownText.text = "Leaving in: " + Mathf.Max(0, Mathf.CeilToInt(countdown));
             countdown -= Time.unscaledDeltaTime;
             yield return null;
         }
 
         countdownText.text = "Leaving in: 0";
 
+        yield return new WaitForSecondsRealtime(0.5f);
         yield return StartCoroutine(FadeToBlackAndLoad(nextSceneName));
     }
 

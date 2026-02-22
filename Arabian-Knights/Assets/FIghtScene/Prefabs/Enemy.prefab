@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 5752768315350806498}
   - component: {fileID: 4548200755095255809}
   m_Layer: 9
-  m_Name: EnemyIcon
+  m_Name: MinimapIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

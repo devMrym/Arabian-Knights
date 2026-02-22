@@ -48,5 +48,9 @@ public class EnemyHealth : MonoBehaviour
         if (rb != null) { rb.linearVelocity = Vector2.zero; rb.bodyType = RigidbodyType2D.Static; }
 
         if (capsuleCollider != null) capsuleCollider.enabled = false;
+
+        Transform minimapIcon = transform.Find("MinimapIcon");
+        if (minimapIcon != null)
+            minimapIcon.gameObject.SetActive(false);
     }
 }
