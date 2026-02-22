@@ -11676,7 +11676,7 @@ MonoBehaviour:
   collectSound: {fileID: 705562449}
   timerWarningSound: {fileID: 705562450}
   countdownText: {fileID: 2100752392}
-  gameTime: 10
+  gameTime: 120
   totalSoldiers: 20
   timerText: {fileID: 1445124179}
   soldierText: {fileID: 1673919853}
