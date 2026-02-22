@@ -1,6 +1,6 @@
+// GeniePower.cs
 using System.Collections;
 using UnityEngine;
-
 public class GeniePower : MonoBehaviour
 {
     public float shieldDuration = 5f;
@@ -8,7 +8,11 @@ public class GeniePower : MonoBehaviour
 
     [Header("References")]
     public PlayerHealth health;
-    public GameObject shieldVisualPrefab; // world shield prefab under player
+    public GameObject shieldVisualPrefab;
+
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip shieldSound;
 
     private GameObject shieldVisualInstance;
     private GenieShieldUI shieldUI;
@@ -16,28 +20,20 @@ public class GeniePower : MonoBehaviour
 
     void Start()
     {
-        // --- WORLD SHIELD UNDER PLAYER ---
         if (shieldVisualPrefab != null)
         {
             shieldVisualInstance = Instantiate(shieldVisualPrefab, transform);
             shieldVisualInstance.transform.localPosition = new Vector3(0, -0.1f, 0);
             shieldVisualInstance.SetActive(false);
         }
-
-        // --- FIND THE UI IN THE SCENE ---
         shieldUI = FindObjectOfType<GenieShieldUI>();
-        if (shieldUI != null)
-        {
-            shieldUI.ShowReady(); // start pulsing
-        }
+        if (shieldUI != null) shieldUI.ShowReady();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && canUse)
-        {
             StartCoroutine(ActivateShield());
-        }
     }
 
     private IEnumerator ActivateShield()
@@ -45,21 +41,16 @@ public class GeniePower : MonoBehaviour
         canUse = false;
         health.isImmune = true;
 
-        if (shieldVisualInstance != null)
-            shieldVisualInstance.SetActive(true);
+        if (audioSource != null && shieldSound != null)
+            audioSource.PlayOneShot(shieldSound);
 
-        if (shieldUI != null)
-            StartCoroutine(shieldUI.ShieldActiveRoutine(shieldDuration));
+        if (shieldVisualInstance != null) shieldVisualInstance.SetActive(true);
+        if (shieldUI != null) StartCoroutine(shieldUI.ShieldActiveRoutine(shieldDuration));
 
         yield return new WaitForSeconds(shieldDuration);
-
         health.isImmune = false;
-
-        if (shieldVisualInstance != null)
-            shieldVisualInstance.SetActive(false);
-
-        if (shieldUI != null)
-            StartCoroutine(shieldUI.ShieldCooldownRoutine(cooldown));
+        if (shieldVisualInstance != null) shieldVisualInstance.SetActive(false);
+        if (shieldUI != null) StartCoroutine(shieldUI.ShieldCooldownRoutine(cooldown));
 
         yield return new WaitForSeconds(cooldown);
         canUse = true;

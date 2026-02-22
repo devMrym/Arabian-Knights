@@ -1,7 +1,7 @@
+// GameManagerFight.cs
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-
 public class GameManagerFight : MonoBehaviour
 {
     public static GameManagerFight Instance;
@@ -17,9 +17,12 @@ public class GameManagerFight : MonoBehaviour
     public string nextSceneName;
     public string mainMenuSceneName;
 
+    [Header("Audio")]
+    public AudioSource musicSource;
+    public AudioClip sceneMusic;
+
     private int enemiesAlive = 0;
     private bool levelFinished = false;
-
     public bool gameStarted { get; private set; } = false;
 
     void Awake()
@@ -30,40 +33,38 @@ public class GameManagerFight : MonoBehaviour
 
     IEnumerator Start()
     {
-        Time.timeScale = 0f; // pause game for tutorial
-
+        Time.timeScale = 0f;
         if (tutorialPanel != null) tutorialPanel.SetActive(false);
         if (tryAgainPanel != null) tryAgainPanel.SetActive(false);
 
-        // Fade from black
+        if (musicSource != null && sceneMusic != null)
+        {
+            musicSource.clip = sceneMusic;
+            musicSource.loop = true;
+            musicSource.ignoreListenerPause = true;
+            musicSource.Play();
+        }
+
         if (screenFader != null)
         {
             yield return new WaitForSecondsRealtime(0.2f);
             yield return StartCoroutine(screenFader.FadeFromBlackRoutine());
         }
-
-        // Show tutorial
-        if (tutorialPanel != null)
-            tutorialPanel.SetActive(true);
+        if (tutorialPanel != null) tutorialPanel.SetActive(true);
     }
 
     public void StartGame()
     {
         if (tutorialPanel != null) tutorialPanel.SetActive(false);
-
         gameStarted = true;
         Time.timeScale = 1f;
     }
 
-    public void RegisterEnemy()
-    {
-        enemiesAlive++;
-    }
+    public void RegisterEnemy() { enemiesAlive++; }
 
     public void EnemyKilled()
     {
         enemiesAlive--;
-
         if (enemiesAlive <= 0 && !levelFinished)
         {
             levelFinished = true;
@@ -74,38 +75,19 @@ public class GameManagerFight : MonoBehaviour
     IEnumerator LevelComplete()
     {
         yield return new WaitForSeconds(1f);
-
-        if (screenFader != null)
-            yield return StartCoroutine(screenFader.FadeToBlackRoutine());
-
+        if (screenFader != null) yield return StartCoroutine(screenFader.FadeToBlackRoutine());
         SceneManager.LoadScene(nextSceneName);
     }
 
-    public void PlayerDied()
-    {
-        StartCoroutine(HandleDeath());
-    }
+    public void PlayerDied() { StartCoroutine(HandleDeath()); }
 
     IEnumerator HandleDeath()
     {
         yield return new WaitForSeconds(1f);
-
-        if (screenFader != null)
-            yield return StartCoroutine(screenFader.FadeToBlackRoutine());
-
-        if (tryAgainPanel != null)
-            tryAgainPanel.SetActive(true);
+        if (screenFader != null) yield return StartCoroutine(screenFader.FadeToBlackRoutine());
+        if (tryAgainPanel != null) tryAgainPanel.SetActive(true);
     }
 
-    public void Retry()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    public void GoToMainMenu()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(mainMenuSceneName);
-    }
+    public void Retry() { Time.timeScale = 1f; SceneManager.LoadScene(SceneManager.GetActiveScene().name); }
+    public void GoToMainMenu() { Time.timeScale = 1f; SceneManager.LoadScene(mainMenuSceneName); }
 }
