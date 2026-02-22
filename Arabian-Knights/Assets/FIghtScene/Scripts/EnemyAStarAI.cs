@@ -1,30 +1,31 @@
 ﻿using UnityEngine;
 using Pathfinding;
-
 public class EnemyAStarAI : MonoBehaviour
 {
     public Transform target;
     public float detectionRadius = 5f;
     public float attackRange = 1f;
     public int attackDamage = 1;
-
     public float wanderRadius = 5f;
     public float wanderCooldown = 2f;
     public float obstacleBuffer = 0.5f;
-
     public float attackCooldown = 1f;
     private float lastAttackTime = -Mathf.Infinity;
 
     [HideInInspector]
     public bool isDead = false;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip attackSound;
+
     private AIPath aiPath;
     private Seeker seeker;
     private Vector3 wanderTarget;
     private float wanderTimer;
-
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private PlayerHealth playerHealth;
 
     void Awake()
     {
@@ -38,13 +39,14 @@ public class EnemyAStarAI : MonoBehaviour
     {
         if (target == null)
             target = GameObject.FindGameObjectWithTag("Player").transform;
-
+        playerHealth = target.GetComponent<PlayerHealth>();
         PickNewWanderTarget();
     }
 
     void Update()
     {
         if (!GameManagerFight.Instance.gameStarted || isDead) return;
+        if (playerHealth != null && playerHealth.isDead) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, target.position);
 
@@ -55,7 +57,6 @@ public class EnemyAStarAI : MonoBehaviour
             wanderTimer -= Time.deltaTime;
             if (wanderTimer <= 0f || Vector2.Distance(transform.position, wanderTarget) < 0.2f)
                 PickNewWanderTarget();
-
             aiPath.destination = wanderTarget;
         }
 
@@ -80,7 +81,6 @@ public class EnemyAStarAI : MonoBehaviour
         {
             Vector2 randomDir = Random.insideUnitCircle * wanderRadius;
             Vector3 candidate = transform.position + new Vector3(randomDir.x, randomDir.y, 0f);
-
             var nnInfo = AstarPath.active.GetNearest(candidate);
             if (nnInfo.node != null && nnInfo.node.Walkable)
             {
@@ -94,7 +94,6 @@ public class EnemyAStarAI : MonoBehaviour
                 }
             }
         }
-
         wanderTarget = transform.position;
         wanderTimer = wanderCooldown;
     }
@@ -102,9 +101,12 @@ public class EnemyAStarAI : MonoBehaviour
     void Attack()
     {
         if (isDead) return;
+        if (playerHealth != null && playerHealth.isDead) return;
+
+        if (audioSource != null && attackSound != null)
+            audioSource.PlayOneShot(attackSound);
 
         animator.SetTrigger("isAttacking");
-
         PlayerHealth player = target.GetComponent<PlayerHealth>();
         if (player != null && !player.isImmune)
             player.TakeDamage(attackDamage);
