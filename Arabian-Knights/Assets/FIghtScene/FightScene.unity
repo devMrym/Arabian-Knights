@@ -12105,7 +12105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.58431375}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -18197,7 +18197,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 213c62901ac8a124f80e960112fcfda7, type: 3}
-  m_Color: {r: 0.29501605, g: 1, b: 0.088679194, a: 1}
+  m_Color: {r: 0.7607011, g: 0.79622644, b: 0.29295114, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
