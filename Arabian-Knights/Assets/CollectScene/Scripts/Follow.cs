@@ -14,11 +14,15 @@ public class Follow : MonoBehaviour
 
     private float actualSpeed;
 
+    private AudioSource footstepSound;
+
+
     void Start()
     {
         anim = GetComponent<Animator>();
         lastPosition = transform.position;
         originalScale = transform.localScale;
+        footstepSound = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -27,6 +31,8 @@ public class Follow : MonoBehaviour
         {
             anim.SetFloat("Speed", 0f);
             lastPosition = transform.position;
+            if (footstepSound.isPlaying)
+                footstepSound.Stop();
             return;
         }
 
@@ -39,32 +45,27 @@ public class Follow : MonoBehaviour
                 Target.position,
                 speed * Time.deltaTime
             );
-        }
 
-        // Calculate REAL movement speed
-        actualSpeed = (transform.position - lastPosition).magnitude / Time.deltaTime;
-
-        // Send actual speed to Animator
-        anim.SetFloat("Speed", actualSpeed);
-
-        // Save position for next frame
-        lastPosition = transform.position;
-
-        if (dist > followDistance)
-        {
-            transform.position = Vector2.MoveTowards(
-                transform.position,
-                Target.position,
-                speed * Time.deltaTime
-            );
-
+            // Flip
             if (Target.position.x > transform.position.x)
                 transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
             else if (Target.position.x < transform.position.x)
                 transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
-        }
-    }
 
+            // Sound
+            if (!footstepSound.isPlaying)
+                footstepSound.Play();
+        }
+        else
+        {
+            if (footstepSound.isPlaying)
+                footstepSound.Stop();
+        }
+
+        actualSpeed = (transform.position - lastPosition).magnitude / Time.deltaTime;
+        anim.SetFloat("Speed", actualSpeed);
+        lastPosition = transform.position;
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !isFollowing)

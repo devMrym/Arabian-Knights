@@ -784,52 +784,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Made by:
-
-    Ashwaq Almutairi
-
-    Maryam Alonazi
-
-    Rayan Alhebr
-
-
-
-    Developed
-    by:
-
-    Ashwaq Almutairi
-
-    Maryam Alonazi
-
-
-
-    Game Art by:
-
-    Rayan
-    Alhebr
-
-    Maryam Alonazi
-
-
-
-    Sound & Music:
-
-
-
-    Special Thanks:
-
-    Family
-    , Friends and Qabas Team
-
-
-
-    Made with Unity
-
-
-
-    Hope you enjoyed <3
-
-'
+  m_text: "Made by:\r\nAshwaq Almutairi\r\nMaryam Alonazi\r\nRayan Alhebr\n\r\nDeveloped
+    by:\r\nAshwaq Almutairi\r\nMaryam Alonazi\n\r\nGame Art by:\r\nRayan Alhebr\r\nMaryam
+    Alonazi\r\nFreepik\r\nJAR Inc\r\nGGBotNet\r\nKenney\r\nPicster\r\nThomas Iche
+    \r\nCodemany\r\nBlack Hammer\r\nTH-DARK-Media\r\nPucci Games\r\n\r\nSound & Music:\r\nPixabay\r\nEalot\r\nHatamitsunami\r\nAjwaa\r\nDragon
+    Studio\r\nMusicholder\r\nYodguard\r\nPearce Wilson King\r\nU_fe12rqkbth\r\nSpooky
+    modem\r\nAlexis Gaming Cam\r\nLiecio\r\nFlutie9211\r\nDriken5482\r\n\r\nSpecial
+    Thanks:\r\nFamily , Friends and Qabas Team\r\nMade with Unity\r\nHope you enjoyed
+    <3"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 20ca273cd9621ca4b8a2461740974439, type: 2}
   m_sharedMaterial: {fileID: 4072025536050331771, guid: 20ca273cd9621ca4b8a2461740974439, type: 2}

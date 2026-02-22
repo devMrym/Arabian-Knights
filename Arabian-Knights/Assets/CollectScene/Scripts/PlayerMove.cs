@@ -9,6 +9,13 @@ public class PlayerMove : MonoBehaviour
     public Animator animator;
 
     private Vector2 movement;
+    private AudioSource footstepSound;
+
+    void Start()
+    {
+        footstepSound = GetComponent<AudioSource>();
+
+    }
 
     void Awake()
     {
@@ -32,6 +39,16 @@ public class PlayerMove : MonoBehaviour
             sprite.flipX = false; // face right
         else if (x < -0.01f)
             sprite.flipX = true;  // face left
+
+        if (movement.magnitude > 0)
+        {
+            if (!footstepSound.isPlaying)
+                footstepSound.Play();
+        }
+        else
+        {
+            footstepSound.Stop();
+        }
     }
 
     void FixedUpdate()

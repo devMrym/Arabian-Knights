@@ -7,6 +7,13 @@ using System.Collections;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public AudioSource collectSound;
+
+    public AudioSource timerWarningSound;
+    private bool timerSoundPlayed = false;
+    public TextMeshProUGUI countdownText;
+
+
 
     [Header("Timer")]
     public float gameTime = 60f;
@@ -127,11 +134,14 @@ public class GameManager : MonoBehaviour
     public void AddSoldier()
     {
         soldiersCollected++;
+        collectSound.Play();
+
         UpdateUI();
         if (soldiersCollected >= totalSoldiers)
         {
             EndGame();
         }
+
     }
 
     void UpdateUI()
@@ -143,11 +153,29 @@ public class GameManager : MonoBehaviour
     {
         timerText.text = "Time: " + Mathf.Ceil(currentTime);
         timerText.color = currentTime <= 20f ? Color.red : Color.white;
+
+        if (currentTime <= 20f && !timerSoundPlayed)
+        {
+            timerWarningSound.Play();
+            timerSoundPlayed = true;
+        }
     }
 
     void EndGame()
     {
         Time.timeScale = 0f;
+
+        foreach (GameObject soldier in GameObject.FindGameObjectsWithTag("Soldier"))
+        {
+            AudioSource soldierAudio = soldier.GetComponent<AudioSource>();
+            if (soldierAudio != null)
+                soldierAudio.Stop();
+        }
+
+
+        // Stop timer sound
+        if (timerWarningSound != null && timerWarningSound.isPlaying)
+            timerWarningSound.Stop();
 
         if (soldiersCollected <= 0)
         {
@@ -161,7 +189,6 @@ public class GameManager : MonoBehaviour
                 resultPanel.SetActive(true);
                 resultText.text = "You Collected: " + soldiersCollected + " Soldiers";
 
-                // Save to SessionData before transitioning
                 if (SessionData.instance != null)
                     SessionData.instance.soldiersCollected = soldiersCollected;
 
@@ -172,8 +199,17 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ResultFadeSequence()
     {
-        yield return new WaitForSecondsRealtime(resultDisplayTime);
-        yield return new WaitForSecondsRealtime(delayBeforeFade);
+        float countdown = 3f;
+
+        while (countdown > 0)
+        {
+            countdownText.text = "Leaving in: " + Mathf.Ceil(countdown);
+            countdown -= Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        countdownText.text = "Leaving in: 0";
+
         yield return StartCoroutine(FadeToBlackAndLoad(nextSceneName));
     }
 

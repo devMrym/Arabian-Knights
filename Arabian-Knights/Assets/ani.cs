@@ -1,16 +1,11 @@
 using UnityEngine;
 
-public class ani : MonoBehaviour
+public class ParallaxLayer : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public float parallaxSpeed = 0.5f;
 
-    // Update is called once per frame
     void Update()
     {
-        
+        transform.position += Vector3.right * parallaxSpeed * Time.deltaTime;
     }
 }
